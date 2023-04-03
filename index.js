@@ -1,10 +1,6 @@
-let currentCard;
-
 let dealerSum = 0;
 let playerSum = 0;
-let dealerHand = [];
-let playerHand = [];
-let hidden;
+let deck = []
 
 const dealerCard1 = document.getElementById('dealer-card-1');
 const dealerCard2 = document.getElementById('dealer-card-2');
@@ -18,38 +14,100 @@ const dealButton = document.getElementById('deal-button');
 const allInButton = document.getElementById('all-in-button');
 const bank = document.getElementById('bank');
 const cardDeck = document.getElementById('card-deck');
+const playerHand = document.getElementById('player-hand');
+const dealerHand = document.getElementById('dealer-hand');
 
+standButton.addEventListener('click', endGame)
+hitButton.addEventListener('click', hit)
+dealButton.addEventListener("click", () => window.location.reload());
 
-
-// function deckOfCards(){
-//     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-//     let suits = ["S", "D", "C", "H"]
-// }
-
+fetch('http://localhost:3000/cards')
+ .then(response => response.json())
+ .then(cards => {
+    deck = [...cards]
+    getStartingHand(cards)
+ })
 
 function getStartingHand(cards){
-    dealerCard1.src = cards[randomCardNum()].image
-    dealerCard2.src = "assets/card-back.png"
-    playerCard1.src = cards[randomCardNum()].image
-    playerCard2.src = cards[randomCardNum()].image
+    //dealButton.style.display = "none"
+    allInButton.style.display = "none"
+    const dealerNum = randomCardNum()
+    const playerNum1 = randomCardNum()
+    const playerNum2 = randomCardNum()
+    
+    dealerCard1.src = cards[dealerNum].image
+    dealerCard2.src = "assets/cardback.jpeg"
+    dealerSum += cards[dealerNum].value
+
+    playerCard1.src = cards[playerNum1].image
+    playerCard2.src = cards[playerNum2].image
+    playerSum += cards[playerNum1].value + cards[playerNum2].value
+    console.log(dealerSum)
+    console.log(playerSum)
 }
 
 function randomCardNum(){
     return Math.floor((Math.random()) * 52)
 }
 
-function showCards(card){
-    //shows the cards on the page
-    dealerCard1.textContent = card.value;
-    dealerCard2.textContent = card.value;
-    playerCard1.textContent = card.value;
-    playerCard2.textContent = card.value;
+function playerDrawCard(card){
+    const newCard = document.createElement('img')
+    newCard.src = card.image
+    playerSum += card.value
+    playerHand.appendChild(newCard)
 }
 
-fetch('http://localhost:3000/cards')
- .then(response => response.json())
- .then(data => {
-    getStartingHand(data)
- })
+function dealerDrawCard(card){
+    const newCard = document.createElement('img')
+    newCard.src = card.image
+    dealerSum += card.value
+    dealerHand.appendChild(newCard)
+}
 
-//junktext
+function hit(){
+    if(playerSum < 21) {
+        playerDrawCard(deck[randomCardNum()])
+        if (playerSum > 21) {
+            const dealerNum2 = randomCardNum()
+            dealerCard2.src = deck[dealerNum2].image
+            dealerSum += deck[dealerNum2].value
+            lose()
+        }
+    }
+    else 
+        hitButton.disabled = true;
+}
+
+function endGame() {
+    const dealerNum2 = randomCardNum()
+    dealerCard2.src = deck[dealerNum2].image
+    dealerSum += deck[dealerNum2].value
+    while (dealerSum < 17)
+        dealerDrawCard(deck[randomCardNum()])
+    standButton.disabled = true;
+    hitButton.disabled = true;
+    if (dealerSum > 21 || dealerSum < playerSum)
+        win()
+    else if (dealerSum > playerSum)
+        lose()
+    else
+        push()
+}
+
+function lose(){
+    const loseMessage = document.createElement("h1")
+    loseMessage.textContent = "YOU LOSE"
+    document.querySelector("#player").append(loseMessage)
+}
+
+function win(){
+    const winMessage = document.createElement("h1")
+    winMessage.textContent = "YOU WIN"
+    document.querySelector("#player").append(winMessage)
+}
+
+function push(){
+    const pushMessage = document.createElement("h1")
+    pushMessage.textContent = "PUSH!"
+    document.querySelector("#player").append(pushMessage)
+}
