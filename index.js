@@ -20,6 +20,14 @@ const allInButton = document.getElementById('all-in-button');
 const bank = document.getElementById('bank');
 const cardDeck = document.getElementById('card-deck');
 
+
+
+// function deckOfCards(){
+//     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+//     let suits = ["S", "D", "C", "H"]
+// }
+
+
 function getStartingHand(cards){
     const myNum = Math.floor(Math.random()) * 52
     console.log(myNum)
@@ -104,3 +112,5 @@ fetch('http://localhost:3000/cards')
  .then(data => {
     getStartingHand(data)
  })
+
+//junktext
