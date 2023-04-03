@@ -22,11 +22,14 @@ const cardDeck = document.getElementById('card-deck');
 
 
 
-function deckOfCards(){
-    let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
-    let suits = ["S", "D", "C", "H"]
+// function deckOfCards(){
+//     let values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+//     let suits = ["S", "D", "C", "H"]
+// }
+function getStartingHand(cards){
+    const myNum = Math.floor(Math.random()) * 52
+    console.log(myNum)
 }
-
 function showCards(card){
     //shows the cards on the page
     dealerCard1.textContent = card.value;
@@ -101,13 +104,8 @@ function sellingAssets(){
 }
 
 
-// fetch('http://localhost:3000/cards')
-//  .then(response => response.json())
-//  .then(data => console.log(data))
-
-
-//  function newDeck() {
-//     fetch("http://localhost:3000/cards")
-//     .then(response => response.json())
-//     .then(cards => console.log(cards))
-//  }
+fetch('http://localhost:3000/cards')
+ .then(response => response.json())
+ .then(data => {
+    getStartingHand(data)
+ })
