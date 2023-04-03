@@ -41,6 +41,7 @@ function showCards(card){
 }
 
 function newGame(){
+    //junktext
     //when the game is over option for new game button is clicked
 }
 
