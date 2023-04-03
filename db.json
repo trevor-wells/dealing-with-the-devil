@@ -1,0 +1,83 @@
+{
+    "cards": [
+        {
+            "id": 1,
+            "name": "ace",
+            "suit": "spade",
+            "image": "ace_of_spades.png",
+            "value": 11
+        },
+        {
+            "id": 2,
+            "name": "two",
+            "suit": "spade",
+            "value": 2
+        },
+        {
+            "id": 3,
+            "name": "three",
+            "suit": "spade",
+            "value": 3
+        },
+        {
+            "id": 4,
+            "name": "four",
+            "suit": "spade",
+            "value": 4
+        },
+        {
+            "id": 5,
+            "name": "five",
+            "suit": "spade",
+            "value": 5
+        },
+        {
+            "id": 6,
+            "name": "six",
+            "suit": "spade",
+            "value": 6
+        },
+        {
+            "id": 7,
+            "name": "seven",
+            "suit": "spade",
+            "value": 7
+        },
+        {
+            "id": 8,
+            "name": "eight",
+            "suit": "spade",
+            "value": 8
+        },
+        {
+            "id": 9,
+            "name": "eight",
+            "suit": "spade",
+            "value": 8
+        },
+        {
+            "id": 10,
+            "name": "eight",
+            "suit": "spade",
+            "value": 8
+        },
+        {
+            "id": 11,
+            "name": "eight",
+            "suit": "spade",
+            "value": 8
+        },
+        {
+            "id": 12,
+            "name": "eight",
+            "suit": "spade",
+            "value": 8
+        },
+        {
+            "id": 13,
+            "name": "eight",
+            "suit": "spade",
+            "value": 8
+        },
+    ]
+}
