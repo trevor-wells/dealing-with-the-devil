@@ -10,16 +10,22 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
-    <audio src="assets/cuphead.mp3" autoplay muted loop type="audio/mpeg"></audio>
+    <audio src="assets/cuphead.mp3" autoplay loop type="audio/mpeg"></audio>
 
     <div id="title">
         <h1>Beat the House!</h1>
+        <span>
+            <p>Dealer Money: <em class="dealer-money"></em></p>
+        </span>
+        <span>
+            <p>Player Money: <em class="player-money"></em></p>
+        </span>
         <span id="out-game-controls">
             <button id="deal-button">Deal</button>
             <button id="all-in-button">All-In</button>
         </span>
         <form id="bet-form">
-            <label for="bet-input">Bet ur squirrels</label>
+            <label for="bet-input">Bet ur kids</label>
             <input id="bet-input" name="bet-input" type="text" placeholder="Enter amount..." />
             <input type="submit" id="bet-button" value="Bet">
             <p id="account-balance"></p>
@@ -29,25 +35,17 @@
     <div id="in-game">
         <section id="dealer">
             <span>
-                <h2>Dealer</h2>
-                <p>Squirrel Pelts:</p>
-                <p id="dealer-money"></p>
+                <p>Dealer Money: <em class="dealer-money"></em></p>
             </span>
             <span id ="dealer-hand">
-                <img id="dealer-card-1">
-                <img id="dealer-card-2">
             </span>
         </section>
         <section id="player">
             <span>
-                <div id="winner-display"></div>
-                <h2>Player</h2>
-                <p>Squirrel Pelts:</p>
-                <p id="player-money"></p>
+                <p>Player Money: <em class="player-money"></em></p>
             </span>
+            <div id="winner-display"></div>
             <span id="player-hand">
-                <img id="player-card-1">
-                <img id="player-card-2">
             </span>
         </section>
         <section id="controls">
