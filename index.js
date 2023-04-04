@@ -1,6 +1,7 @@
 let dealerSum = 0;
 let playerSum = 0;
 let deck = []
+let stats = []
 
 const dealerCard1 = document.getElementById('dealer-card-1');
 const dealerCard2 = document.getElementById('dealer-card-2');
@@ -13,7 +14,7 @@ const standButton = document.getElementById('stand-button');
 const dealButton = document.getElementById('deal-button');
 const allInButton = document.getElementById('all-in-button');
 const doubleDownButton = document.getElementById('double-button');
-const betButton = document.getElementById('bet-button');
+const betForm = document.getElementById('bet-form');
 const bank = document.getElementById('bank');
 const cardDeck = document.getElementById('card-deck');
 const playerHand = document.getElementById('player-hand');
@@ -26,20 +27,22 @@ standButton.addEventListener('click', endGame)
 hitButton.addEventListener('click', hit)
 dealButton.addEventListener("click", () => window.location.reload());
 doubleDownButton.addEventListener("click", () => doubleDown());
-betButton.addEventListener("submit", betMoney);
+betForm.addEventListener("submit", betMoney);
 
 fetch('http://localhost:3000/cards')
  .then(response => response.json())
- .then(cards => {
-    deck = [...cards]
-    getStartingHand(cards)
+ .then(data => {
+    deck = data
+    console.log(deck)
+    getStartingHand(data)
  })
 
  fetch('http://localhost:3000/stats')
  .then(response => response.json())
- .then(stats => {
-    playerMoney.textContent = stats[0]["player-money"]
-    dealerMoney.textContent = stats[0]["dealer-money"]
+ .then(data => {
+    stats = data
+    playerMoney.textContent = data.player_money
+    dealerMoney.textContent = data.dealer_money
  })
 
 function getStartingHand(cards){
@@ -131,27 +134,28 @@ function doubleDown(){
 }
 function betMoney(event){
     event.preventDefault()
-    const bet = parseInt(event.target.elements["bet"].value)
-    if (bet > parseInt(playerMoney.textContent)) {
+    const bet = parseInt(event.target.children[1].value)
+    if (bet > stats.player_money) {
         alert("You cannot bet more money than you have!")
+        event.target.reset()
         return
     }
-    playerMoney.textContent = parseInt(playerMoney.textContent) - bet
-    bank.textContent = parseInt(bank.textContent) + bet
+    stats.player_money = stats.player_money - bet
+    stats.dealer_money = stats.dealer_money - bet
+    playerMoney.textContent = stats.player_money
+    event.target.reset();
+    patchMoney()
+}
 
-    // Update the JSON data with the new player money value
+function patchMoney(){
     fetch('http://localhost:3000/stats/', {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-            "player-money": parseInt(playerMoney.textContent),
-            "dealer-money": parseInt(dealerMoney.textContent)
+            "player_money": stats.player_money,
+            "dealer_money": stats.dealer_money
         })
     })
     .then(response => response.json())
     .then(data => console.log(data))
-    
-    event.target.reset();
 }
