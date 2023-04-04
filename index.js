@@ -11,6 +11,7 @@ const dealerHand = document.getElementById('dealer-hand')
 const titleScreen = document.getElementById('title')
 const inGameScreen = document.getElementById('in-game')
 const winnerDisplay = document.getElementById(`winner-display`)
+const paymentForm = document.getElementById('payment-form')
 let dealerSum = 0
 let playerSum = 0
 let deck = []
@@ -36,6 +37,7 @@ function loadTitleScreen(){
 }
 
 function startGame(){
+    document.querySelector("body").style.backgroundImage = "url('assets/in-game-background.webp')"
     titleScreen.style.display = "none"
     inGameScreen.style.display = "block"
 
@@ -57,7 +59,7 @@ function startGame(){
 function dealerCardBack(){
     cardBack = document.createElement('img')
     cardBack.id = "card-back"
-    cardBack.src = "assets/cardback.jpeg"
+    cardBack.src = "assets/cardback.png"
     dealerHand.appendChild(cardBack)
 }
 
@@ -137,6 +139,14 @@ function betMoney(event){
     event.target.reset()
 }
 
+// function addPayment(event){
+//     event.preventDefault()
+
+  
+//     }
+//     event.target.reset()
+
+
 function patchMoney(){
     fetch('http://localhost:3000/stats/', {
         method: 'PATCH',
@@ -200,6 +210,7 @@ function resetGame(){
     standButton.style.display = "inline"
     doubleDownButton.style.display = "inline"
     switchScreens()
+    document.querySelector("body").style.backgroundImage = "url('assets/title-screen-background.jpeg')"
     betForm.style.display = "block"
 }
 
@@ -259,3 +270,44 @@ function findAce(card){
     if(card.className === "ace")
         return true
     }
+
+/*
+core functions
+-don't allow dealer to go negative. if your bet exceeds the amount of money they have, adjust your bet accordingly
+-css. game result should pop up in the middle and not go back to title screen until you click a button
+-player and dealerSum visible to user
+
+fun additions
+-option to sell your assets when you run out of money
+-rock paper scissors on a push
+-have the cards overlap
+-execute the house when you bankrupt them (crosshair click make casino explode)
+-
+*/
+
+function formatString(event) {
+    let inputChar = String.fromCharCode(event.keyCode);
+    let code = event.keyCode;
+    let allowedKeys = [8];
+    if (allowedKeys.indexOf(code) !== -1) {
+      return;
+    }
+  
+    event.target.value = event.target.value.replace(
+      /^([1-9]\/|[2-9])$/g, '0$1/' // 3 > 03/
+    ).replace(
+      /^(0[1-9]|1[0-2])$/g, '$1/' // 11 > 11/
+    ).replace(
+      /^([0-1])([3-9])$/g, '0$1/$2' // 13 > 01/3
+    ).replace(
+      /^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2' // 141 > 01/41
+    ).replace(
+      /^([0]+)\/|[0]+$/g, '0' // 0/ > 0 and 00 > 0
+    ).replace(
+      /[^\d\/]|^[\/]*$/g, '' // To allow only digits and `/`
+    ).replace(
+      /\/\//g, '/' // Prevent entering more than 1 `/`
+    );
+  }
+  
+  

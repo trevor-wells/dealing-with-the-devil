@@ -1,19 +1,31 @@
-* {
-    color: white
-}
-
-button {
-    color: black
-}
-
 body{
-    background-color: rgb(133, 162, 161)
-}
-img {
-    width: 300px;
-    height: 400px;
+    background-image: url("assets/title-screen-background.jpeg")
 }
 
-input {
-    color: black
+img {
+    width: 200px;
+    height: 300px;
+}
+
+.ascii-art{
+    display: flex;
+    font-family: monospace;
+    white-space: pre;
+    background: white;
+    opacity: 0.5;
+    font-weight: 900;
+    border: 3px solid black;
+    border-radius: 20px;
+    justify-content: center;
+}
+
+#title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+input{
+    text-align: center;
 }
