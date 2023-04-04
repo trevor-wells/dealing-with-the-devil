@@ -143,7 +143,7 @@ function patchMoney(){
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(stats)
     })
-    .then(updateMoney())
+    .then(() => updateMoney())
 }
 
 function switchScreens(){
@@ -174,7 +174,7 @@ function lose(){
 }
 
 function win(){
-    stats.player_money += (stats.bet * 2),
+    stats.player_money += (stats.bet * 2)
     stats.bet = 0
     patchMoney()
     winnerDisplay.textContent = "YOU WIN"
