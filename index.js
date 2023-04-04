@@ -22,7 +22,6 @@ const dealerHand = document.getElementById('dealer-hand');
 const titleScreen = document.getElementById('title')
 const inGameScreen = document.getElementById('in-game')
 
-
 standButton.addEventListener('click', endGame)
 hitButton.addEventListener('click', hit)
 dealButton.addEventListener("click", () => window.location.reload());
@@ -91,7 +90,6 @@ function hit(){
     else 
         hitButton.disabled = true;
 }
-
 function endGame() {
     const dealerNum2 = randomCardNum()
     dealerCard2.src = deck[dealerNum2].image
@@ -157,5 +155,9 @@ function patchMoney(){
         })
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+    stats = data
+    playerMoney.textContent = data.player_money
+    dealerMoney.textContent = data.dealer_money
+    })
 }
