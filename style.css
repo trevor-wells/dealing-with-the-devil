@@ -1,8 +1,19 @@
-/* * {
-    all: revert;
-} */
+* {
+    color: white
+}
 
+button {
+    color: black
+}
+
+body{
+    background-color: rgb(133, 162, 161)
+}
 img {
     width: 300px;
     height: 400px;
+}
+
+input {
+    color: black
 }

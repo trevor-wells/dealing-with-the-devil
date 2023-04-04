@@ -6,20 +6,27 @@ const dealerCard1 = document.getElementById('dealer-card-1');
 const dealerCard2 = document.getElementById('dealer-card-2');
 const playerCard1 = document.getElementById('player-card-1');
 const playerCard2 = document.getElementById('player-card-2');
-const playerScore = document.getElementById('player-score');
-const dealerScore = document.getElementById('dealer-score');
+const playerMoney = document.getElementById('player-money');
+const dealerMoney = document.getElementById('dealer-money');
 const hitButton = document.getElementById('hit-button');
 const standButton = document.getElementById('stand-button');
 const dealButton = document.getElementById('deal-button');
 const allInButton = document.getElementById('all-in-button');
+const doubleDownButton = document.getElementById('double-button');
+const betButton = document.getElementById('bet-button');
 const bank = document.getElementById('bank');
 const cardDeck = document.getElementById('card-deck');
 const playerHand = document.getElementById('player-hand');
 const dealerHand = document.getElementById('dealer-hand');
+const titleScreen = document.getElementById('title')
+const inGameScreen = document.getElementById('in-game')
+
 
 standButton.addEventListener('click', endGame)
 hitButton.addEventListener('click', hit)
 dealButton.addEventListener("click", () => window.location.reload());
+doubleDownButton.addEventListener("click", () => doubleDown());
+betButton.addEventListener("submit", betMoney);
 
 fetch('http://localhost:3000/cards')
  .then(response => response.json())
@@ -28,9 +35,15 @@ fetch('http://localhost:3000/cards')
     getStartingHand(cards)
  })
 
+ fetch('http://localhost:3000/stats')
+ .then(response => response.json())
+ .then(stats => {
+    playerMoney.textContent = stats[0]["player-money"]
+    dealerMoney.textContent = stats[0]["dealer-money"]
+ })
+
 function getStartingHand(cards){
-    //dealButton.style.display = "none"
-    allInButton.style.display = "none"
+    titleScreen.style.display = "none"
     const dealerNum = randomCardNum()
     const playerNum1 = randomCardNum()
     const playerNum2 = randomCardNum()
@@ -42,8 +55,6 @@ function getStartingHand(cards){
     playerCard1.src = cards[playerNum1].image
     playerCard2.src = cards[playerNum2].image
     playerSum += cards[playerNum1].value + cards[playerNum2].value
-    console.log(dealerSum)
-    console.log(playerSum)
 }
 
 function randomCardNum(){
@@ -71,7 +82,7 @@ function hit(){
             const dealerNum2 = randomCardNum()
             dealerCard2.src = deck[dealerNum2].image
             dealerSum += deck[dealerNum2].value
-            lose()
+            endGame()
         }
     }
     else 
@@ -86,12 +97,14 @@ function endGame() {
         dealerDrawCard(deck[randomCardNum()])
     standButton.disabled = true;
     hitButton.disabled = true;
-    if (dealerSum > 21 || dealerSum < playerSum)
-        win()
-    else if (dealerSum > playerSum)
+    if (dealerSum > playerSum || playerSum > 21)
         lose()
+    else if (dealerSum > 21 || dealerSum < playerSum)
+        win()
     else
         push()
+    inGameScreen.style.display = "none"
+    titleScreen.style.display = "block"
 }
 
 function lose(){
@@ -110,4 +123,35 @@ function push(){
     const pushMessage = document.createElement("h1")
     pushMessage.textContent = "PUSH!"
     document.querySelector("#player").append(pushMessage)
+}
+function doubleDown(){
+    playerDrawCard(deck[randomCardNum()])
+    doubleDownButton.style.display = "none"
+    endGame()
+}
+function betMoney(event){
+    event.preventDefault()
+    const bet = parseInt(event.target.elements["bet"].value)
+    if (bet > parseInt(playerMoney.textContent)) {
+        alert("You cannot bet more money than you have!")
+        return
+    }
+    playerMoney.textContent = parseInt(playerMoney.textContent) - bet
+    bank.textContent = parseInt(bank.textContent) + bet
+
+    // Update the JSON data with the new player money value
+    fetch('http://localhost:3000/stats/', {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "player-money": parseInt(playerMoney.textContent),
+            "dealer-money": parseInt(dealerMoney.textContent)
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    
+    event.target.reset();
 }
