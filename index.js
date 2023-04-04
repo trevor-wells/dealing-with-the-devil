@@ -1,5 +1,6 @@
 let dealerSum = 0;
 let playerSum = 0;
+let playerBet = 0;
 let deck = []
 let stats = []
 
@@ -15,12 +16,11 @@ const dealButton = document.getElementById('deal-button');
 const allInButton = document.getElementById('all-in-button');
 const doubleDownButton = document.getElementById('double-button');
 const betForm = document.getElementById('bet-form');
-const bank = document.getElementById('bank');
-const cardDeck = document.getElementById('card-deck');
 const playerHand = document.getElementById('player-hand');
 const dealerHand = document.getElementById('dealer-hand');
 const titleScreen = document.getElementById('title')
 const inGameScreen = document.getElementById('in-game')
+const winnerDisplay = document.getElementById(`winner-display`)
 
 standButton.addEventListener('click', endGame)
 hitButton.addEventListener('click', hit)
@@ -32,7 +32,6 @@ fetch('http://localhost:3000/cards')
  .then(response => response.json())
  .then(data => {
     deck = data
-    console.log(deck)
     getStartingHand(data)
  })
 
@@ -80,10 +79,7 @@ function dealerDrawCard(card){
 function hit(){
     if(playerSum < 21) {
         playerDrawCard(deck[randomCardNum()])
-        if (playerSum > 21) {
-            const dealerNum2 = randomCardNum()
-            dealerCard2.src = deck[dealerNum2].image
-            dealerSum += deck[dealerNum2].value
+        if (playerSum >= 21) {
             endGame()
         }
     }
@@ -94,37 +90,14 @@ function endGame() {
     const dealerNum2 = randomCardNum()
     dealerCard2.src = deck[dealerNum2].image
     dealerSum += deck[dealerNum2].value
-    while (dealerSum < 17)
+    while (dealerSum < 17 && playerSum < 22)
         dealerDrawCard(deck[randomCardNum()])
     standButton.disabled = true;
     hitButton.disabled = true;
-    if (dealerSum > playerSum || playerSum > 21)
-        lose()
-    else if (dealerSum > 21 || dealerSum < playerSum)
-        win()
-    else
-        push()
-    inGameScreen.style.display = "none"
-    titleScreen.style.display = "block"
+    decideWinner()
+    setTimeout(switchScreens, 3000)
 }
 
-function lose(){
-    const loseMessage = document.createElement("h1")
-    loseMessage.textContent = "YOU LOSE"
-    document.querySelector("#player").append(loseMessage)
-}
-
-function win(){
-    const winMessage = document.createElement("h1")
-    winMessage.textContent = "YOU WIN"
-    document.querySelector("#player").append(winMessage)
-}
-
-function push(){
-    const pushMessage = document.createElement("h1")
-    pushMessage.textContent = "PUSH!"
-    document.querySelector("#player").append(pushMessage)
-}
 function doubleDown(){
     playerDrawCard(deck[randomCardNum()])
     doubleDownButton.style.display = "none"
@@ -138,9 +111,10 @@ function betMoney(event){
         event.target.reset()
         return
     }
-    stats.player_money = stats.player_money - bet
-    stats.dealer_money = stats.dealer_money - bet
-    playerMoney.textContent = stats.player_money
+    stats.player_money -= bet
+    stats.dealer_money -= bet
+    stats.bet = bet
+    console.log(playerBet)
     event.target.reset();
     patchMoney()
 }
@@ -149,15 +123,55 @@ function patchMoney(){
     fetch('http://localhost:3000/stats/', {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-            "player_money": stats.player_money,
-            "dealer_money": stats.dealer_money
+        body: JSON.stringify(stats)
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-    stats = data
-    playerMoney.textContent = data.player_money
-    dealerMoney.textContent = data.dealer_money
-    })
+    }
+    // .then(response => response.json())
+    // .then(data => {
+    // stats = data
+    // playerMoney.textContent = data.player_money
+    // dealerMoney.textContent = data.dealer_money
+    // })
+
+function switchScreens(){
+    if (titleScreen.style.display === "none")
+        titleScreen.style.display = "block"
+    else
+        titleScreen.style.display = "none"
+    if (inGameScreen.style.display === "none")
+        inGameScreen.style.display = "block"
+    else
+        inGameScreen.style.display = "none"
+}
+
+function decideWinner(){
+    if (dealerSum > playerSum && dealerSum <= 21 || playerSum > 21)
+        lose()
+    else if (dealerSum > 21 || dealerSum < playerSum)
+        win()
+    else
+        push()
+}
+
+function lose(){
+    stats.dealer_money += (stats.bet * 2)
+    stats.bet = 0
+    console.log(playerBet)
+    patchMoney()
+    winnerDisplay.textContent = "YOU LOSE"
+}
+
+function win(){
+    stats.player_money += (stats.bet * 2),
+    stats.bet = 0
+    patchMoney()
+    winnerDisplay.textContent = "YOU WIN"
+}
+
+function push(){
+    stats.player_money += stats.bet
+    stats.dealer_money += stats.bet
+    stats.bet = 0
+    patchMoney()
+    winnerDisplay.textContent = "PUSH"
 }
