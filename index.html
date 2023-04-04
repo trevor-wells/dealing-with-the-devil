@@ -5,44 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="index.js"></script>
-    <link src="index.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <title>Beat the House</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
-    <audio src="assets/age-of-war.mp3" autoplay loop></audio>
-    <header id="title">
-        <h1>Beat the House</h1>
-    </header>
-    <section id="dealer">
+    <audio src="assets/cuphead.mp3" autoplay loop type="audio/mpeg"></audio>
+
+    <div id="title">
+        <h1>Beat the House!</h1>
         <span>
-            <h2>Dealer</h2>
-            <p>Squirrel Pelts:</p>
+            <p>Dealer Money: <em class="dealer-money"></em></p>
         </span>
         <span>
-            <img id="dealer-card-1">
-            <img id="dealer-card-2">
+            <p>Player Money: <em class="player-money"></em></p>
         </span>
-    </section>
-    <section id="player">
-        <span>
-            <h2>Player</h2>
-            <p>Squirrel Pelts:</p>
-        </span>
-        <span>
-            <img id="player-card-1">
-            <img id="player-card-2">
-        </span>
-    </section>
-    <section id="controls">
         <span id="out-game-controls">
             <button id="deal-button">Deal</button>
             <button id="all-in-button">All-In</button>
         </span>
-        <span id="in-game-controls">
-            <button id="hit-button">Hit</button>
-            <button id="stand-button">Stand</button>
-        </span>
-    </section>
+        <form id="bet-form">
+            <label for="bet-input">Bet ur kids</label>
+            <input id="bet-input" name="bet-input" type="text" placeholder="Enter amount..." />
+            <input type="submit" id="bet-button" value="Bet">
+            <p id="account-balance"></p>
+        </form>
+    </div>
+
+    <div id="in-game">
+        <section id="dealer">
+            <span>
+                <p>Dealer Money: <em class="dealer-money"></em></p>
+            </span>
+            <span id ="dealer-hand">
+            </span>
+        </section>
+        <section id="player">
+            <span>
+                <p>Player Money: <em class="player-money"></em></p>
+            </span>
+            <div id="winner-display"></div>
+            <span id="player-hand">
+            </span>
+        </section>
+        <section id="controls">
+            <span id="in-game-controls">
+                <button id="hit-button">Hit</button>
+                <button id="stand-button">Stand</button>
+                <button id="double-button">Double Down</button>
+            </span>
+        </section>
+    </div>
     
 </body>
 </html>
