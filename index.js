@@ -52,10 +52,6 @@ function startGame(){
         if(playerSum === 21)
             endGame()
     })
-    .then(() => {
-        console.log(playerHand.children)
-        console.log(dealerHand.children)
-    })
 }
 
 function dealerCardBack(){
@@ -72,21 +68,19 @@ function randomCardNum(){
 function playerDrawCard(card){
     const newCard = document.createElement('img')
     newCard.src = card.image
-    playerSum += card.value
     playerHand.appendChild(newCard)
-
     if (card.value === 11)
         newCard.className = "ace"
+    calculatePlayerScore(card)
 }
 
 function dealerDrawCard(card){
     const newCard = document.createElement('img')
     newCard.src = card.image
-    dealerSum += card.value
     dealerHand.appendChild(newCard)
-
     if (card.value === 11)
         newCard.className = "ace"
+    calculateDealerScore(card)
 }
 
 function hit(){
@@ -103,8 +97,8 @@ function hit(){
 
 function doubleDown(){
     playerDrawCard(deck[randomCardNum()])
-    stats.dealer_money -= stats.bet;
-    stats.player_money -= stats.bet;
+    stats.dealer_money -= stats.bet
+    stats.player_money -= stats.bet
     stats.bet = stats.bet * 2
     patchMoney()
         doubleDownButton.style.display = "none"
@@ -114,16 +108,17 @@ function doubleDown(){
 function endGame() {
     const dealerCardNum = randomCardNum()
     cardBack.src = deck[dealerCardNum].image
-    dealerSum += deck[dealerCardNum].value
+    calculateDealerScore(deck[dealerCardNum])
     if(deck[dealerCardNum].value === 11)
         cardBack.className = "ace"
-    while (dealerSum < 17 && playerSum < 22)
+    while (dealerSum < 17 && playerSum < 22) {
         dealerDrawCard(deck[randomCardNum()])
+    }
     standButton.style.display = "none"
     hitButton.style.display = "none"
     doubleDownButton.style.display = "none"
     decideWinner()
-    setTimeout(resetGame, 3000)
+    setTimeout(resetGame, 4000)
 
 }
 
@@ -209,7 +204,6 @@ function resetGame(){
 }
 
 function checkBet(bet){
-    console.log(typeof bet)
     if (stats.bet > 0 && stats.player_money < bet) {
         return false
     }
@@ -231,12 +225,11 @@ function checkBet(bet){
 function allIn(){
     stats.bet = stats.player_money
     stats.dealer_money -= stats.bet
-    stats.player_money -= stats.bet;
+    stats.player_money -= stats.bet
     patchMoney()
     if(!checkBet(stats.bet))
         doubleDownButton.style.display = "none"
 }
-
 
 function updateMoney(){
     playerMoney[0].textContent = stats.player_money.toLocaleString()
@@ -245,26 +238,24 @@ function updateMoney(){
     dealerMoney[1].textContent = stats.dealer_money.toLocaleString()
 }
 
-// function calculateScore(card){
-//     playerSum += card.value
-//     // check to see if player hand has ACE
-//     // add 11 to player sum if playerSum < 21
-//     // if not, add 1 to player sum
-//     // if playerSum > dealerSum, and dealerSum has an ACE that is 17 or less then Dealer draws a card
-//     playerHand.children.find((card) => {
-//         if(card.className === "ace")
-//             return true
-//     })
-    // if (playerSum > 21 && playerHand.children)
-    //     playerSum -= 10
-    // else if (dealerSum < 17)
-    //     playerSum += 11
-    // else if (dealerSum > 22)
-    //     playerSum += 1
-// }
+function calculatePlayerScore(card){
+    playerSum += card.value
+    if (Array.from(playerHand.children).find(findAce) && playerSum > 21) {
+        Array.from(playerHand.children).find(findAce).className = ""
+        playerSum -= 10
+    }
+}
 
-// function sellAssets(){
-//     if (stats.player_money <= 0) {
-//         alert("You have no money to sell!")
-//     }
-// }
+function calculateDealerScore(card){
+    dealerSum += card.value
+    if ((Array.from(dealerHand.children).find(findAce) && dealerSum > 21) ||
+        (Array.from(dealerHand.children).find(findAce) && dealerSum < playerSum && dealerSum >= 17)){
+            Array.from(dealerHand.children).find(findAce).className = ""
+            dealerSum -= 10
+    }
+}
+
+function findAce(card){
+    if(card.className === "ace")
+        return true
+    }
