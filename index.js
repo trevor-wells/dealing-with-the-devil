@@ -31,7 +31,6 @@ function loadTitleScreen(){
     .then(response => response.json())
     .then(data => {
     stats = data
-    console.log(dealerMoney)
     updateMoney()
  })
 }
@@ -53,7 +52,10 @@ function startGame(){
         if(playerSum === 21)
             endGame()
     })
-
+    .then(() => {
+        console.log(playerHand.children)
+        console.log(dealerHand.children)
+    })
 }
 
 function dealerCardBack(){
@@ -249,13 +251,16 @@ function updateMoney(){
 //     // add 11 to player sum if playerSum < 21
 //     // if not, add 1 to player sum
 //     // if playerSum > dealerSum, and dealerSum has an ACE that is 17 or less then Dealer draws a card
-
-//     if (playerSum > 21 && playerHand.children)
-//         playerSum -= 10
-//     else if (dealerSum < 17)
-//         playerSum += 11
-//     else if (dealerSum > 22)
-//         playerSum += 1
+//     playerHand.children.find((card) => {
+//         if(card.className === "ace")
+//             return true
+//     })
+    // if (playerSum > 21 && playerHand.children)
+    //     playerSum -= 10
+    // else if (dealerSum < 17)
+    //     playerSum += 11
+    // else if (dealerSum > 22)
+    //     playerSum += 1
 // }
 
 // function sellAssets(){
