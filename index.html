@@ -6,53 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="index.js"></script>
     <link href="style.css" rel="stylesheet">
-    <title>Beat the House</title>
+    <title>Dealing with the Devil</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
 </head>
 <body>
-    <audio src="assets/cherokee.mp3" autoplay loop type="audio/mpeg"></audio>
-
-    <div id="title">
-        <div class="ascii-art">
-            
- ________  _______   ________  _________        _________  ___  ___  _______           ___  ___  ________  ___  ___     ___    _______      
- |\   __  \|\  ___ \ |\   __  \|\___   ___\     |\___   ___\\  \|\  \|\  ___ \         |\  \|\  \|\   __  \|\  \|\  \  _|\  \__|\  ___ \     
- \ \  \|\ /\ \   __/|\ \  \|\  \|___ \  \_|     \|___ \  \_\ \  \\\  \ \   __/|        \ \  \\\  \ \  \|\  \ \  \\\  \|\   ____\ \   __/|    
-  \ \   __  \ \  \_|/_\ \   __  \   \ \  \           \ \  \ \ \   __  \ \  \_|/__       \ \   __  \ \  \\\  \ \  \\\  \ \  \___|\ \  \_|/__  
-   \ \  \|\  \ \  \_|\ \ \  \ \  \   \ \  \           \ \  \ \ \  \ \  \ \  \_|\ \       \ \  \ \  \ \  \\\  \ \  \\\  \ \_____  \ \  \_|\ \ 
-    \ \_______\ \_______\ \__\ \__\   \ \__\           \ \__\ \ \__\ \__\ \_______\       \ \__\ \__\ \_______\ \_______\|____|\  \ \_______\
-     \|_______|\|_______|\|__|\|__|    \|__|            \|__|  \|__|\|__|\|_______|        \|__|\|__|\|_______|\|_______| ____\_\  \|_______|
-                                                                                                                         |\___    __\        
-                                                                                                                         \|___|\__\_|        
-                                                                                                                              \|__|          
-                                                                                                                                          
+    <div id="title-screen">
+        <div id="title-div">
+            <img id="dealing-with" src="assets/dealing-with.png">
+            <div class="break"></div>
+            <img id="the-devil" src="assets/the-devil.png">
         </div>
-        <form id="payment-form">
-            <label for="payment-input">Card Information</label>
-            <input id="payment-input" name="payment-input" placeholder="Warning: Real Money!" maxlength="16">
-            <input type="text" id="card-expiration" placeholder="MM/YY" maxlength="5" onkeyup="formatString(event);">
-            <input type="text" id="cvs-code" placeholder="CCV code" maxlength="3">
-            <input type="submit" id="payment" value="Confirm">
-        </form>
-        <span>
-            <p>Dealer Money: <em class="dealer-money"></em></p>
-        </span>
-        <span>
-            <p>Player Money: <em class="player-money"></em></p>
-        </span>
-        <span>
-            <button id="deal-button">Deal</button>
-            <button id="all-in-button">All-In</button>
-        </span>
-        <form id="bet-form">
-            <label for="bet-input">Bet ur kids</label>
-            <input id="bet-input" name="bet-input" type="text" placeholder="Enter amount..." />
-            <input type="submit" id="bet-button" value="Bet">
-            <p id="account-balance"></p>
-        </form>
+        <div class="fill"></div>
+        <div id="money-div">
+            <span>
+                <p>Dealer Money: <em class="dealer-money"></em></p>
+            </span>
+            <div class="break"></div>
+            <span>
+                <p>Player Money: <em class="player-money"></em></p>
+            </span>
+            <div class="break"></div>
+            <span>
+                <button id="deal-button">Deal</button>
+            </span>
+            <div class="break"></div>
+            <span>
+                <form id="bet-form">
+                    <label for="bet-input">Make a Bet</label>
+                    <input id="bet-input" name="bet-input" type="text" placeholder="Enter amount..." />
+                    <input type="submit" id="bet-button" value="Bet">
+                    <p id="account-balance"></p>
+                </form>
+                <button id="all-in-button">All-In</button>
+            </span>
+            <div class="break"></div>
+            <div id="assets-div">
+            </div>
+        </div>
     </div>
 
-    <div id="in-game">
+
+
+    <div id="in-game-screen">
         <section id="dealer">
             <span>
                 <p>Dealer Money: <em class="dealer-money"></em></p>
@@ -76,6 +72,24 @@
             </span>
         </section>
     </div>
-    
+
+
+
+    <div id="losing-screen">
+        <div id="payment-div">
+            <form id="payment-form">
+                <label for="payment-input">Card Information</label>
+                <input id="payment-input" name="payment-input" placeholder="Warning: Real Money!" maxlength="19" onkeyup="formatPaymentInfoKey(event)" >
+                <input type="text" id="card-expiration" placeholder="MM/YY" maxlength="5" onkeyup="formatDate(event);">
+                <input type="text" id="cvs-code" placeholder="CCV code" maxlength="3">
+                <input type="submit" id="payment" value="Confirm">
+            </form>
+        </div>
+    </div>
+
+
+
+    <div id="winning-screen">
+    </div>
 </body>
 </html>
