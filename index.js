@@ -6,6 +6,7 @@ const standButton = document.getElementById('stand-button')
 const dealButton = document.getElementById('deal-button')
 const allInButton = document.getElementById('all-in-button')
 const doubleDownButton = document.getElementById('double-button')
+const fullScreenButton = document.getElementById('full-screen-button')
 const betForm = document.getElementById('bet-form')
 const playerHand = document.getElementById('player-hand')
 const dealerHand = document.getElementById('dealer-hand')
@@ -45,6 +46,7 @@ doubleDownButton.addEventListener("click", doubleDown)
 loadTitleScreen()
 function loadTitleScreen(){
     inGameScreen.style.display = "none"
+    paymentForm.style.display = "none"
     fetchAssets()
     inGameMusic.pause()
     titleMusic.play()
@@ -96,11 +98,12 @@ function patchAssets(id){
 }
 
 function loadGameScreen(){
+    inGameScreen.style.color = "white"
     titleMusic.pause()
     inGameMusic.play()
     background.style.backgroundImage = "url('assets/in-game-background.webp')"
     titleScreen.style.display = "none"
-    inGameScreen.style.display = "block"
+    inGameScreen.style.display = "flex"
 
     fetch('http://localhost:3000/cards')
     .then(response => response.json())
@@ -183,7 +186,7 @@ function checkBet(bet){
 
 function allIn(){
     if(checkBet(globalStats.player_money)){
-        globalStats.bet = globalStats.player_money
+        globalStats.bet = parseInt(globalStats.player_money)
         globalStats.dealer_money -= globalStats.bet
         globalStats.player_money -= globalStats.bet
         patchMoney()
@@ -388,11 +391,9 @@ function formatDate(event) {
     cardField.value = newNumber;
 }
 
-function isNumber(char){
-    return('0123456789'.indexOf(char) !== -1);
-}
 
 
+// This is not even entirely comprehensive. There's more.
 //TO - DO LIST
     /*
     core functions
@@ -406,3 +407,17 @@ function isNumber(char){
     -execute the house when you bankrupt them (crosshair click make casino explode)
     -
     */
+
+
+    function getFullscreenElement(){
+        return document.fullscreenElement
+    }
+    function toggleFullscreen(){
+        if(getFullscreenElement()){
+            document.exitFullscreen();
+        }
+        else{
+            document.documentElement.requestFullscreen().catch(console.log)
+        }
+    }
+    fullScreenButton.addEventListener('dblclick', () => {toggleFullscreen()})

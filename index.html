@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
 </head>
 <body>
+    <h2>Try Me!</h2>
+    <button id="full-screen-button">Full Screen</button>
+
     <div id="title-screen">
         <div id="title-div">
             <img id="dealing-with" src="assets/dealing-with.png">
@@ -31,16 +34,16 @@
                 <button id="deal-button">Deal</button>
             </span>
             <div class="break"></div>
-            <span>
+            <span id="test">
                 <form id="bet-form">
                     <label for="bet-input">Make a Bet</label>
                     <input id="bet-input" name="bet-input" type="text" placeholder="Enter amount..." />
                     <input type="submit" id="bet-button" value="Bet">
                     <p id="account-balance"></p>
+                    <button id="all-in-button">All-In</button>
                 </form>
-                <button id="all-in-button">All-In</button>
             </span>
-            <div class="break"></div>
+            <div class="fill"></div>
             <div id="assets-div">
             </div>
         </div>
@@ -49,25 +52,34 @@
 
 
     <div id="in-game-screen">
+        <div class="half-fill"></div>
         <section id="dealer">
             <span>
                 <p>Dealer Money: <em class="dealer-money"></em></p>
             </span>
+            <div class="break"></div>
             <span id ="dealer-hand" class="card-container">
             </span>
+            <div class="break"></div>
         </section>
+        <div class="fill"></div>
         <section id="player">
             <span>
                 <p>Player Money: <em class="player-money"></em></p>
             </span>
+            <div class="break"></div>
             <div id="winner-display"></div>
+            <div class="break"></div>
             <span id="player-hand" class="card-container">
             </span>
         </section>
+        <div class="break"></div>
         <section id="controls">
             <span id="in-game-controls">
                 <button id="hit-button">Hit</button>
+                <div class="break"></div>
                 <button id="stand-button">Stand</button>
+                <div class="break"></div>
                 <button id="double-button">Double Down</button>
             </span>
         </section>
