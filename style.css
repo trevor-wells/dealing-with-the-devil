@@ -3,37 +3,34 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Henny Penny', cursive;
+    font-size: 1.2rem;
     text-align: center;
+    color: #d2cbc3;
+}
+
+html{
+    background: url("assets/title-screen-background.jpeg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 body{
-    background-image: url("assets/title-screen-background.jpeg");
-    size: cover;
-    background-repeat: no-repeat;
-}
-
-p{
-    font-size: 20px;
+    height: 100%;
+    overflow: hidden;
 }
 
 button{
-    width: 100px;
+    background-color: #c04444;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 20px;
 }
 .card {
     width: 200px;
     height: 300px;
-}
-
-.ascii-art{
-    display: block;
-    font-family: monospace;
-    white-space: pre;
-    background: white;
-    opacity: 0.5;
-    font-weight: 900;
-    border: 3px solid black;
-    border-radius: 20px;
-    justify-content: center;
 }
 
 .asset{
@@ -41,17 +38,19 @@ button{
     height: 100px;
 }
 #title-screen{
-    display: flex;
-    height: 100vh;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(12,1fr);
+    grid-template-rows: repeat(12,1fr);
+    align-content: stretch;
+    justify-content:stretch;
 }
 
+#full-screen{
+    grid-column: 12 / 13;
+    grid-row: 5 / 6;
+}
 #title-div{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    grid-column: 1 / 4;
 }
 
 #money-div{
@@ -73,22 +72,8 @@ button{
     height: 20px;
 }
 
-#money-div{
-    display: flex;
-    flex-wrap: wrap;
-
-}
-
 #in-game-screen{
     flex-wrap: wrap;
     justify-content: center;
     align-content: end;
 }
-#dealing-with{
-    width: 1100px;
-}
-
-#the-devil{
-    width: 800px;
-}
-

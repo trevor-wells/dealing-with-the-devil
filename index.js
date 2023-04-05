@@ -15,8 +15,9 @@ const inGameScreen = document.getElementById('in-game-screen')
 const losingScreen = document.getElementById('losing-screen')
 const winnerDisplay = document.getElementById(`winner-display`)
 const paymentForm = document.getElementById('payment-form')
-const background = document.querySelector("body")
+const background = document.querySelector("html")
 const assetsDiv = document.getElementById("assets-div")
+const miniGameScreen = document.getElementById("mini-game-screen")
 let globalAssets
 let dealerSum = 0
 let playerSum = 0
@@ -29,7 +30,8 @@ let globalBet;
 //AUDIO VARIABLES
 const titleMusic = new Audio('assets/title-music.mp3')
 const inGameMusic = new Audio('assets/in-game-music.mp3')
-
+const loseMusic = new Audio('assets/lose-music.mp3')
+const winMusic = new Audio('assets/win-music.mp3')
 
 //EVENT LISTENERS
 // paymentForm.addEventListener('submit', formatPaymentInfo)
@@ -103,7 +105,7 @@ function loadGameScreen(){
     inGameMusic.play()
     background.style.backgroundImage = "url('assets/in-game-background.webp')"
     titleScreen.style.display = "none"
-    inGameScreen.style.display = "flex"
+    inGameScreen.style.display = "grid"
 
     fetch('http://localhost:3000/cards')
     .then(response => response.json())
@@ -117,6 +119,7 @@ function loadGameScreen(){
         cardBack.src = "assets/cardback.png"
         dealerHand.appendChild(cardBack)
         dealerDrawCard(deck[randomCardNum()])
+        // miniGameScreen.appendChild(cardBack)
     })
     .then (() => {
         if(playerSum === 21)
@@ -124,20 +127,48 @@ function loadGameScreen(){
     })
 }
 
-function loadWinScreen(){}
+function decideOutcome(){
+    if (globalStats.player_money === 0){
+        loadLoseScreen()
+        return false
+    }
+    else if (globalStats.dealer_money === 0){
+        loadWinScreen()
+        return false
+    }
+    return true
+}
+
+function loadWinScreen(){
+    background.style.backgroundImage = "url('assets/win-screen-background.jpeg')"
+    inGameScreen.style.display = "none"
+    winMusic.play()
+    inGameMusic.pause()
+
+}
 
 function loadLoseScreen(){
-    background.style.backgroundImage = "url('assets/lose-screen-background.webp')"
+    background.style.backgroundImage = "url('assets/lose-screen-background.jpeg')"
     inGameScreen.style.display = "none"
+    paymentForm.style.display = "block"
+    fetchAssets()
+    loseMusic.play()
+    inGameMusic.pause()
+}
+
+function loadResultScreen(){
+    background.style.backgroundImage = "url('assets/result-screen.jpeg')"
+    inGameScreen.style.display = "none"
+    paymentForm.style.display = "none"
 }
 
 function switchScreens(){
     if (titleScreen.style.display === "none")
-        titleScreen.style.display = "flex"
+        titleScreen.style.display = "grid"
     else
         titleScreen.style.display = "none"
     if (inGameScreen.style.display === "none")
-        inGameScreen.style.display = "flex"
+        inGameScreen.style.display = "grid"
     else
         inGameScreen.style.display = "none"
 }
@@ -227,7 +258,8 @@ function endGame() {
     hitButton.style.display = "none"
     doubleDownButton.style.display = "none"
     decideWinner()
-    setTimeout(resetGame, 4000)
+    if(decideOutcome())
+        setTimeout(resetGame, 4000)
 }
 
 function resetGame(){
@@ -243,7 +275,7 @@ function resetGame(){
     doubleDownButton.style.display = "inline"
     background.style.backgroundImage = "url('assets/title-screen-background.jpeg')"
     betForm.style.display = "block"
-    titleScreen.style.display = "flex"
+    titleScreen.style.display = "grid"
     loadTitleScreen()
 }
 
@@ -269,6 +301,15 @@ function dealerDrawCard(card){
     if (card.value === 11)
         newCard.className = "ace card"
     calculateDealerScore(card)
+}
+
+function miniGameDrawCard(card){
+    const newCard = document.createElement('img')
+    newCard.src = card.image
+    newCard.className = "card"
+    miniGame.appendChild(newCard)
+    if (card.value === 11)
+        newCard.className = "ace card"
 }
 
 function findAce(card){
@@ -328,7 +369,7 @@ function lose(){
     globalStats.dealer_money += (globalStats.bet * 2)
     globalStats.bet = 0
     patchMoney()
-    winnerDisplay.textContent = "YOU LOSE"
+    loadResultScreen()
 }
 
 function win(){
@@ -336,6 +377,7 @@ function win(){
     globalStats.bet = 0
     patchMoney()
     winnerDisplay.textContent = "YOU WIN"
+    loadResultScreen()
 }
 
 function push(){
@@ -344,8 +386,19 @@ function push(){
     globalStats.bet = 0
     patchMoney()
     winnerDisplay.textContent = "PUSH"
+    miniGame()
+    
 }
 
+// function miniGame(){
+//     loadResultScreen()
+//     const newCard = document.createElement('img')
+//     newCard.src = card.image
+//     newCard.className = "card"
+//     miniGame.appendChild(newCard)
+
+
+// }
 
 
 //HTML FUNCTIONS
@@ -391,7 +444,18 @@ function formatDate(event) {
     cardField.value = newNumber;
 }
 
-
+function getFullscreenElement(){
+    return document.fullscreenElement
+}
+function toggleFullscreen(){
+    if(getFullscreenElement()){
+        document.exitFullscreen();
+    }
+    else{
+        document.documentElement.requestFullscreen().catch(console.log)
+    }
+}
+fullScreenButton.addEventListener('dblclick', () => {toggleFullscreen()})
 
 // This is not even entirely comprehensive. There's more.
 //TO - DO LIST
@@ -407,17 +471,3 @@ function formatDate(event) {
     -execute the house when you bankrupt them (crosshair click make casino explode)
     -
     */
-
-
-    function getFullscreenElement(){
-        return document.fullscreenElement
-    }
-    function toggleFullscreen(){
-        if(getFullscreenElement()){
-            document.exitFullscreen();
-        }
-        else{
-            document.documentElement.requestFullscreen().catch(console.log)
-        }
-    }
-    fullScreenButton.addEventListener('dblclick', () => {toggleFullscreen()})
