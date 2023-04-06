@@ -17,7 +17,7 @@ const winnerDisplay = document.getElementById(`winner-display`)
 const paymentForm = document.getElementById('payment-form')
 const background = document.querySelector("html")
 const assetsDiv = document.getElementById("assets-div")
-const miniGameScreen = document.getElementById("mini-game-screen")
+const miniGame = document.getElementById("mini-game")
 let globalAssets
 let dealerSum = 0
 let playerSum = 0
@@ -34,7 +34,7 @@ const loseMusic = new Audio('assets/lose-music.mp3')
 const winMusic = new Audio('assets/win-music.mp3')
 
 //EVENT LISTENERS
-// paymentForm.addEventListener('submit', formatPaymentInfo)
+paymentForm.addEventListener('submit', formatPaymentInfo)
 dealButton.addEventListener("click", loadGameScreen)
 allInButton.addEventListener("click", allIn)
 betForm.addEventListener("submit", bet)
@@ -119,7 +119,8 @@ function loadGameScreen(){
         cardBack.src = "assets/cardback.png"
         dealerHand.appendChild(cardBack)
         dealerDrawCard(deck[randomCardNum()])
-        // miniGameScreen.appendChild(cardBack)
+        // miniGame.appendChild(cardBack)
+        
     })
     .then (() => {
         if(playerSum === 21)
@@ -156,11 +157,11 @@ function loadLoseScreen(){
     inGameMusic.pause()
 }
 
-function loadResultScreen(){
-    background.style.backgroundImage = "url('assets/result-screen.jpeg')"
-    inGameScreen.style.display = "none"
-    paymentForm.style.display = "none"
-}
+// function loadResultScreen(){
+//     background.style.backgroundImage = "url('assets/result-screen.jpeg')"
+//     inGameScreen.style.display = "none"
+//     paymentForm.style.display = "none"
+// }
 
 function switchScreens(){
     if (titleScreen.style.display === "none")
@@ -303,15 +304,6 @@ function dealerDrawCard(card){
     calculateDealerScore(card)
 }
 
-function miniGameDrawCard(card){
-    const newCard = document.createElement('img')
-    newCard.src = card.image
-    newCard.className = "card"
-    miniGame.appendChild(newCard)
-    if (card.value === 11)
-        newCard.className = "ace card"
-}
-
 function findAce(card){
     if(card.className === "ace card")
         return true
@@ -369,7 +361,7 @@ function lose(){
     globalStats.dealer_money += (globalStats.bet * 2)
     globalStats.bet = 0
     patchMoney()
-    loadResultScreen()
+    // loadResultScreen()
 }
 
 function win(){
@@ -377,7 +369,7 @@ function win(){
     globalStats.bet = 0
     patchMoney()
     winnerDisplay.textContent = "YOU WIN"
-    loadResultScreen()
+    // loadResultScreen()
 }
 
 function push(){
@@ -386,7 +378,7 @@ function push(){
     globalStats.bet = 0
     patchMoney()
     winnerDisplay.textContent = "PUSH"
-    miniGame()
+    // miniGame()
     
 }
 
@@ -396,7 +388,8 @@ function push(){
 //     newCard.src = card.image
 //     newCard.className = "card"
 //     miniGame.appendChild(newCard)
-
+//     if (card.value === 11)
+//         newCard.className = "ace card"
 
 // }
 
