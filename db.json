@@ -366,44 +366,44 @@
     }
   ],
   "stats": {
-    "player_money": 10000,
-    "dealer_money": 10000,
+    "player_money": 0,
+    "dealer_money": 11000,
     "bet": 0,
     "wins": 0
   },
   "assets": [
     {
       "id": 0,
-      "name": "house",
-      "owned": false,
+      "name": "House",
+      "owned": true,
       "image": "assets/housey.png",
       "value": 80000
     },
     {
       "id": 1,
-      "name": "car",
-      "owned": false,
+      "name": "Car",
+      "owned": true,
       "image": "assets/cary.png",
       "value": 10000
     },
     {
       "id": 2,
-      "name": "wedding_ring",
-      "owned": false,
+      "name": "Wedding Ring",
+      "owned": true,
       "image": "assets/ringy.png",
       "value": 7000
     },
     {
       "id": 3,
-      "name": "kid",
-      "owned": false,
+      "name": "Kid",
+      "owned": true,
       "image": "assets/kiddy.png",
       "value": 500
     },
     {
       "id": 4,
-      "name": "soul",
-      "owned": false,
+      "name": "Soul",
+      "owned": true,
       "image": "assets/souly.png",
       "value": 2500
     }

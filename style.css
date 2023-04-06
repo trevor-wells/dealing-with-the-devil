@@ -17,7 +17,7 @@ html{
 }
 
 body{
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -28,6 +28,7 @@ button{
     padding: 10px;
     font-size: 20px;
 }
+
 .card {
     width: 200px;
     height: 300px;
@@ -37,45 +38,117 @@ button{
     width: 100px;
     height: 100px;
 }
+
 #title-screen{
     display: grid;
-    grid-template-columns: repeat(12,1fr);
-    grid-template-rows: repeat(12,1fr);
+    grid-template-columns: repeat(20,5vw);
+    grid-template-rows: repeat(20,5vh);
     align-content: stretch;
     justify-content:stretch;
     height: 100vh;
 }
 
 #full-screen{
-    grid-column: 10 / 12;
-    grid-row: 10 / 11;
+    grid-column: 18 / 20;
+    grid-row: 18 / 20;
 }
 
 #title-div{
-    grid-column: 1 / 3;
+    grid-column: 1 / 2;
     overflow: hide;
 }
 
+#deal-div{
+    grid-column: 2/3;
+    grid-row: 6/7;
+}
+
+#deal-button{
+    height:120px;
+    width: 240px;
+    font-size: 40px;
+}
+
+#dealing-with{
+    width: 40vw;
+}
+
+#the-devil{
+    width: 30vw;
+}
+
 #money-div{
-    grid-column: 10/13;
-}
-.break{
-    flex-basis: 100%;
-    height: 0px;
+    grid-column: 14/16;
 }
 
-.fill{
-    flex-basis: 100%;
-    height: 160px;
+#bet-button{
+    background-color:#c04444;
+    border: none;
+    border-radius: 5px;
+    justify-self: stretch;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
-.half-fill{
-    flex-basis: 100%;
-    height: 20px;
+#bet-button:hover{
+    cursor: pointer;
+    background:#772929;
+}
+
+#bet-input{
+    color: #c04444;
+    background-color: #d2cbc3;
+    border: none;
+    border-radius: 5px;
+}
+
+#bet-div{
+    display: grid;
+    grid-column: 17/20;
+}
+
+#all-in-div{
+    grid-column: 18/20;
+    grid-row: 4/5;
+}
+
+#all-in-button{
+    display: grid;
+}
+
+#assets-div{
+    grid-row: 16/19;
+    grid-column: 3/9;
+    display: flex;
 }
 
 #in-game-screen{
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: end;
+    display: grid;
+    grid-template-columns: repeat(20,5vw);
+    grid-template-rows: repeat(20,5vh);
+}
+
+#dealer{
+    grid-column: 1/21;
+    grid-row: 1/5;
+}
+
+#player{
+    grid-column: 1/21;
+    grid-row: 9/13;
+}
+
+button:hover {
+    cursor: pointer;
+    background: #772929
+    }
+
+#hit-and-stand-div{
+    grid-column: 10/12;
+    grid-row: 17/18;
+}
+
+#double-down-div{
+    grid-column: 10/12;
+    grid-row: 19/20;
 }

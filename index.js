@@ -7,6 +7,7 @@ const dealButton = document.getElementById('deal-button')
 const allInButton = document.getElementById('all-in-button')
 const doubleDownButton = document.getElementById('double-button')
 const fullScreenButton = document.getElementById('full-screen-button')
+const playAgainButton = document.getElementById('play-again-button')
 const betForm = document.getElementById('bet-form')
 const playerHand = document.getElementById('player-hand')
 const dealerHand = document.getElementById('dealer-hand')
@@ -28,30 +29,34 @@ let globalBet;
 
 
 //AUDIO VARIABLES
-const titleMusic = new Audio('assets/title-music.mp3')
-const inGameMusic = new Audio('assets/in-game-music.mp3')
-const loseMusic = new Audio('assets/lose-music.mp3')
-const winMusic = new Audio('assets/win-music.mp3')
+// const titleMusic = new Audio('assets/title-music.mp3')
+// const inGameMusic = new Audio('assets/in-game-music.mp3')
+// const loseMusic = new Audio('assets/lose-music.mp3')
+// const winMusic = new Audio('assets/win-music.mp3')
 
 //EVENT LISTENERS
 paymentForm.addEventListener('submit', formatPaymentInfo)
 dealButton.addEventListener("click", loadGameScreen)
 allInButton.addEventListener("click", allIn)
-betForm.addEventListener("submit", bet)
+betForm.addEventListener("submit", betMoney)
 standButton.addEventListener('click', endGame)
 hitButton.addEventListener('click', hit)
 doubleDownButton.addEventListener("click", doubleDown)
+// playAgainButton.addEventListener("click", playAgain)
 
 
 
 //SCREEN SWITCH FUNCTIONS
 loadTitleScreen()
+fetchAssets()
+assetsDiv.style.display = "none"
 function loadTitleScreen(){
     inGameScreen.style.display = "none"
     paymentForm.style.display = "none"
-    fetchAssets()
-    inGameMusic.pause()
-    titleMusic.play()
+    assetsDiv.style.display = "flex"
+    // inGameMusic.pause()
+    // titleMusic.play()
+
 
     fetch('http://localhost:3000/stats')
     .then(response => response.json())
@@ -73,12 +78,16 @@ function fetchAssets(){
 
 function createAsset(asset){
     if(asset.owned){
-        const myAsset = document.createElement('img')
-        myAsset.src = asset.image
-        myAsset.id = asset.id
-        myAsset.className = "asset"
-        myAsset.addEventListener("click" , sellAsset)
-        assetsDiv.append(myAsset)
+        const myFig = document.createElement('fig')
+        const myImg = document.createElement('img')
+        const myFigCap = document.createElement('figcaption')
+        myImg.src = asset.image
+        myImg.id = asset.id
+        myImg.className = "asset"
+        myImg.addEventListener("click" , sellAsset)
+        myFigCap.textContent = asset.name
+        myFig.append(myImg,myFigCap)
+        assetsDiv.append(myFig)
     }
 }
 
@@ -101,11 +110,12 @@ function patchAssets(id){
 
 function loadGameScreen(){
     inGameScreen.style.color = "white"
-    titleMusic.pause()
-    inGameMusic.play()
+    // titleMusic.pause()
+    // inGameMusic.play()
     background.style.backgroundImage = "url('assets/in-game-background.webp')"
     titleScreen.style.display = "none"
     inGameScreen.style.display = "grid"
+    assetsDiv.style.display = "none"
 
     fetch('http://localhost:3000/cards')
     .then(response => response.json())
@@ -129,32 +139,41 @@ function loadGameScreen(){
 }
 
 function decideOutcome(){
-    if (globalStats.player_money === 0){
-        loadLoseScreen()
-        return false
+    if(globalStats.player_money === 0){
+        if(Array.from(globalAssets).find(checkOwned)){
+            loadTitleScreen()
+            return true
+        }
+        else {
+            loadLoseScreen()
+            return false
+        }
     }
     else if (globalStats.dealer_money === 0){
         loadWinScreen()
         return false
     }
+    assetsDiv.innerHTML = ""
     return true
 }
 
+function checkOwned(asset){
+    return asset.owned
+}
 function loadWinScreen(){
     background.style.backgroundImage = "url('assets/win-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    winMusic.play()
-    inGameMusic.pause()
+    // winMusic.play()
+    // inGameMusic.pause()
 
 }
 
 function loadLoseScreen(){
     background.style.backgroundImage = "url('assets/lose-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    paymentForm.style.display = "block"
-    fetchAssets()
-    loseMusic.play()
-    inGameMusic.pause()
+    paymentForm.style.display = "grid"
+    // loseMusic.play()
+    // inGameMusic.pause()
 }
 
 // function loadResultScreen(){
@@ -177,7 +196,7 @@ function switchScreens(){
 
 
 //TITLE SCREEN FUNCTIONS
-function bet(event){
+function betMoney(event){
     event.preventDefault()
     const myBet = parseInt(event.target.children[1].value)
     if(checkBet(myBet)) {
@@ -186,6 +205,7 @@ function bet(event){
         globalStats.bet = myBet
         patchMoney()
         betForm.style.display = "none"
+        allInButton.style.display = "none"
         if(!checkBet(myBet))
             doubleDownButton.style.display = "none"
     }
@@ -217,14 +237,16 @@ function checkBet(bet){
 }
 
 function allIn(){
+    debugger
     if(checkBet(globalStats.player_money)){
-        globalStats.bet = parseInt(globalStats.player_money)
+        globalStats.bet = globalStats.player_money
         globalStats.dealer_money -= globalStats.bet
         globalStats.player_money -= globalStats.bet
         patchMoney()
-    }
-    if(!checkBet(globalStats.bet))
+        allInButton.style.display = "none"
         doubleDownButton.style.display = "none"
+        betForm.style.display = "none"
+    }
 }
 
 function patchMoney(){
@@ -258,9 +280,10 @@ function endGame() {
     standButton.style.display = "none"
     hitButton.style.display = "none"
     doubleDownButton.style.display = "none"
+    assetsDiv.style.display = "flex"
     decideWinner()
     if(decideOutcome())
-        setTimeout(resetGame, 4000)
+        setTimeout(resetGame, 4500)
 }
 
 function resetGame(){
@@ -275,7 +298,8 @@ function resetGame(){
     standButton.style.display = "inline"
     doubleDownButton.style.display = "inline"
     background.style.backgroundImage = "url('assets/title-screen-background.jpeg')"
-    betForm.style.display = "block"
+    allInButton.style.display = "grid"
+    betForm.style.display = "grid"
     titleScreen.style.display = "grid"
     loadTitleScreen()
 }
@@ -361,6 +385,7 @@ function lose(){
     globalStats.dealer_money += (globalStats.bet * 2)
     globalStats.bet = 0
     patchMoney()
+    winnerDisplay.textContent = "YOU LOSE"
     // loadResultScreen()
 }
 
@@ -436,6 +461,11 @@ function formatDate(event) {
     }
     cardField.value = newNumber;
 }
+function isNumber(char){
+    return('0123456789'.indexOf(char) !== -1);
+}
+
+
 
 function getFullscreenElement(){
     return document.fullscreenElement
