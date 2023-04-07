@@ -15,10 +15,13 @@ const titleScreen = document.getElementById('title-screen')
 const inGameScreen = document.getElementById('in-game-screen')
 const losingScreen = document.getElementById('losing-screen')
 const winnerDisplay = document.getElementById(`winner-display`)
+const loserDisplay = document.getElementById(`loser-display`)
+const pushDisplay = document.getElementById(`push-display`)
 const paymentForm = document.getElementById('payment-form')
 const background = document.querySelector("html")
 const assetsDiv = document.getElementById("assets-div")
 const miniGame = document.getElementById("mini-game")
+
 let globalAssets
 let dealerSum = 0
 let playerSum = 0
@@ -29,10 +32,10 @@ let globalBet;
 
 
 //AUDIO VARIABLES
-// const titleMusic = new Audio('assets/title-music.mp3')
-// const inGameMusic = new Audio('assets/in-game-music.mp3')
-// const loseMusic = new Audio('assets/lose-music.mp3')
-// const winMusic = new Audio('assets/win-music.mp3')
+const titleMusic = new Audio('assets/title-music.mp3')
+const inGameMusic = new Audio('assets/in-game-music.mp3')
+const loseMusic = new Audio('assets/lose-music.mp3')
+const winMusic = new Audio('assets/win-music.mp3')
 
 //EVENT LISTENERS
 paymentForm.addEventListener('submit', formatPaymentInfo)
@@ -53,9 +56,8 @@ assetsDiv.style.display = "none"
 function loadTitleScreen(){
     inGameScreen.style.display = "none"
     paymentForm.style.display = "none"
-    assetsDiv.style.display = "flex"
-    // inGameMusic.pause()
-    // titleMusic.play()
+    inGameMusic.pause()
+    titleMusic.play()
 
 
     fetch('http://localhost:3000/stats')
@@ -110,8 +112,8 @@ function patchAssets(id){
 
 function loadGameScreen(){
     inGameScreen.style.color = "white"
-    // titleMusic.pause()
-    // inGameMusic.play()
+    titleMusic.pause()
+    inGameMusic.play()
     background.style.backgroundImage = "url('assets/in-game-background.webp')"
     titleScreen.style.display = "none"
     inGameScreen.style.display = "grid"
@@ -153,7 +155,7 @@ function decideOutcome(){
         loadWinScreen()
         return false
     }
-    assetsDiv.innerHTML = ""
+    assetsDiv.style.display = "none"
     return true
 }
 
@@ -163,17 +165,19 @@ function checkOwned(asset){
 function loadWinScreen(){
     background.style.backgroundImage = "url('assets/win-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    // winMusic.play()
-    // inGameMusic.pause()
-
+    inGameMusic.pause()
+    winMusic.play()
+    // winnerText.textContent = "YOU MADE IT TO HEAVEN!"
+    
 }
 
 function loadLoseScreen(){
     background.style.backgroundImage = "url('assets/lose-screen-background.jpeg')"
     inGameScreen.style.display = "none"
     paymentForm.style.display = "grid"
-    // loseMusic.play()
-    // inGameMusic.pause()
+    inGameMusic.pause()
+    loseMusic.play()
+ 
 }
 
 // function loadResultScreen(){
@@ -237,7 +241,6 @@ function checkBet(bet){
 }
 
 function allIn(){
-    debugger
     if(checkBet(globalStats.player_money)){
         globalStats.bet = globalStats.player_money
         globalStats.dealer_money -= globalStats.bet
@@ -292,6 +295,8 @@ function resetGame(){
     playerMoney[0].textContent = globalStats.player_money.toLocaleString()
     dealerMoney[0].textContent = globalStats.dealer_money.toLocaleString()
     winnerDisplay.innerHTML = ""
+    loserDisplay.innerHTML = ""
+    pushDisplay.innerHTML = ""
     playerHand.innerHTML = ""
     dealerHand.innerHTML = ""
     hitButton.style.display = "inline"
@@ -385,7 +390,9 @@ function lose(){
     globalStats.dealer_money += (globalStats.bet * 2)
     globalStats.bet = 0
     patchMoney()
-    winnerDisplay.textContent = "YOU LOSE"
+    loserDisplay.textContent = "YOU LOSE"
+    winnerDisplay.innerHTML = ""
+    pushDisplay.innerHTML = ""
     // loadResultScreen()
 }
 
@@ -394,6 +401,8 @@ function win(){
     globalStats.bet = 0
     patchMoney()
     winnerDisplay.textContent = "YOU WIN"
+    loserDisplay.innerHTML = ""
+    pushDisplay.innerHTML = ""
     // loadResultScreen()
 }
 
@@ -402,9 +411,10 @@ function push(){
     globalStats.dealer_money += globalStats.bet
     globalStats.bet = 0
     patchMoney()
-    winnerDisplay.textContent = "PUSH"
+    pushDisplay.textContent = "PUSH"
+    winnerDisplay.innerHTML = ""
+    loserDisplay.innerHTML = ""
     // miniGame()
-    
 }
 
 // function miniGame(){
@@ -461,11 +471,10 @@ function formatDate(event) {
     }
     cardField.value = newNumber;
 }
+
 function isNumber(char){
     return('0123456789'.indexOf(char) !== -1);
 }
-
-
 
 function getFullscreenElement(){
     return document.fullscreenElement

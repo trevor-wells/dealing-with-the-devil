@@ -366,8 +366,8 @@
     }
   ],
   "stats": {
-    "player_money": 0,
-    "dealer_money": 11000,
+    "player_money": 20000,
+    "dealer_money": 80000,
     "bet": 0,
     "wins": 0
   },

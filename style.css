@@ -100,6 +100,7 @@ button{
     background-color: #d2cbc3;
     border: none;
     border-radius: 5px;
+    
 }
 
 #bet-div{
@@ -130,7 +131,7 @@ button{
 
 #dealer{
     grid-column: 1/21;
-    grid-row: 1/5;
+    grid-row: 2/5;
 }
 
 #player{
@@ -151,4 +152,18 @@ button:hover {
 #double-down-div{
     grid-column: 10/12;
     grid-row: 19/20;
+}
+
+#loser-display{
+    font-size: 80px;
+    color: #c04444;
+}
+
+#winner-display{
+    font-size: 80px;
+    color: #0d8924;
+}
+
+#push-display{
+    font-size: 80px;
 }

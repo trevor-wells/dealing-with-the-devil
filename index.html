@@ -24,11 +24,11 @@
      
         <div id="money-div">
             <span>
-                <p>Dealer Money<br><em class="dealer-money"></em></p>
+                <p>Dealer Obol<br><em class="dealer-money"></em></p>
             </span>
            
             <span>
-                <p>Player Money<br><em class="player-money"></em></p>
+                <p>Player Obol<br><em class="player-money"></em></p>
             </span>
        </div>
         <div id="deal-div">
@@ -37,7 +37,7 @@
         <div id="bet-div">
             <form id="bet-form">
                 <label for="bet-input">Make a Bet</label>
-                <input id="bet-input" name="bet-input" type="text"/>
+                <input id="bet-input" name="bet-input" type="text" placeholder="..."/>
                 <input type="submit" id="bet-button" value="Bet">
                 <p id="account-balance"></p>
             </form>
@@ -55,16 +55,18 @@
     <div id="in-game-screen">
         <div id="dealer">
             <span>
-                <p>Dealer Money: <em class="dealer-money"></em></p>
+                <p>Dealer Obol: <em class="dealer-money"></em></p>
             </span>
             <span id ="dealer-hand" class="card-container">
             </span>
         </div>
         <div id="player">
             <span>
-                <p>Player Money: <em class="player-money"></em></p>
+                <p>Player Obol: <em class="player-money"></em></p>
             </span>
             <div id="winner-display"></div>
+            <div id="loser-display"></div>
+            <div id="push-display"></div>
             <span id="player-hand" class="card-container">
             </span>
         </div>
@@ -95,6 +97,7 @@
 
 
     <div id="winning-screen">
+        
     </div>
 
 
