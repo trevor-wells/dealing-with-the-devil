@@ -9,5 +9,3 @@ You'll start with a respectable 20,000 Obol, but the Devil has a whopping 80,000
 But wait, there's more! If you run out of Obol, don't despair just yet. You'll get a second chance to redeem yourself, but this time you'll need to sell off your assets for Obol. You only get one shot at this, so use it wisely. And if you somehow still manage to lose (yikes!), the Devil will claim your soul for eternity.
 
 So go ahead, give it your best shot. Just remember to play responsibly and keep your eyes on the prize. And one last thing - everything in this game is fictional, except for your soul. So if you lose it, there are no refunds. Good luck!
-
-

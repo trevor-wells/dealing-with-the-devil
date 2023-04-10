@@ -74,21 +74,21 @@
       "id": 11,
       "name": "jack",
       "suit": "spade",
-      "image": "resources/cards/jack_of_spades.png",
+      "image": "resources/cards/jack_of_spades2.png",
       "value": 10
     },
     {
       "id": 12,
       "name": "queen",
       "suit": "spade",
-      "image": "resources/cards/queen_of_spades.png",
+      "image": "resources/cards/queen_of_spades2.png",
       "value": 10
     },
     {
       "id": 13,
       "name": "king",
       "suit": "spade",
-      "image": "resources/cards/king_of_spades.png",
+      "image": "resources/cards/king_of_spades2.png",
       "value": 10
     },
     {
@@ -165,21 +165,21 @@
       "id": 24,
       "name": "jack",
       "suit": "diamond",
-      "image": "resources/cards/jack_of_diamonds.png",
+      "image": "resources/cards/jack_of_diamonds2.png",
       "value": 10
     },
     {
       "id": 25,
       "name": "queen",
       "suit": "diamond",
-      "image": "resources/cards/queen_of_diamonds.png",
+      "image": "resources/cards/queen_of_diamonds2.png",
       "value": 10
     },
     {
       "id": 26,
       "name": "king",
       "suit": "diamond",
-      "image": "resources/cards/king_of_diamonds.png",
+      "image": "resources/cards/king_of_diamonds2.png",
       "value": 10
     },
     {
@@ -256,21 +256,21 @@
       "id": 37,
       "name": "jack",
       "suit": "club",
-      "image": "resources/cards/jack_of_clubs.png",
+      "image": "resources/cards/jack_of_clubs2.png",
       "value": 10
     },
     {
       "id": 38,
       "name": "queen",
       "suit": "club",
-      "image": "resources/cards/queen_of_clubs.png",
+      "image": "resources/cards/queen_of_clubs2.png",
       "value": 10
     },
     {
       "id": 39,
       "name": "king",
       "suit": "club",
-      "image": "resources/cards/king_of_clubs.png",
+      "image": "resources/cards/king_of_clubs2.png",
       "value": 10
     },
     {
@@ -347,21 +347,21 @@
       "id": 50,
       "name": "jack",
       "suit": "heart",
-      "image": "resources/cards/jack_of_hearts.png",
+      "image": "resources/cards/jack_of_hearts2.png",
       "value": 10
     },
     {
       "id": 51,
       "name": "queen",
       "suit": "heart",
-      "image": "resources/cards/queen_of_hearts.png",
+      "image": "resources/cards/queen_of_hearts2.png",
       "value": 10
     },
     {
       "id": 52,
       "name": "king",
       "suit": "heart",
-      "image": "resources/cards/king_of_hearts.png",
+      "image": "resources/cards/king_of_hearts2.png",
       "value": 10
     }
   ],
