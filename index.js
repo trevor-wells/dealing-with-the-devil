@@ -4,25 +4,24 @@ const dealerMoney = document.getElementsByClassName('dealer-money')
 const playerHand = document.getElementById('player-hand')
 const dealerHand = document.getElementById('dealer-hand')
 const betForm = document.getElementById('bet-form')
-const background = document.querySelector("html")
+const background = document.querySelector('html')
 const titleScreen = document.getElementById('title-screen')
 const inGameScreen = document.getElementById('in-game-screen')
 const losingScreen = document.getElementById('losing-screen')
 const winningScreen = document.getElementById("winning-screen")
-const winnerDisplay = document.getElementById(`winner-display`)
-const loserDisplay = document.getElementById(`loser-display`)
-const pushDisplay = document.getElementById(`push-display`)
 const hitButton = document.getElementById('hit-button')
 const standButton = document.getElementById('stand-button')
 const dealButton = document.getElementById('deal-button')
 const allInButton = document.getElementById('all-in-button')
 const doubleDownButton = document.getElementById('double-button')
 const fullScreenButton = document.getElementById('full-screen-button')
-const playAgainButton1 = document.getElementById("play-again-button1")
-const playAgainButton2 = document.getElementById("play-again-button2")
-const assetsDiv = document.getElementById("assets-div")
+const playAgainButton1 = document.getElementById('play-again-button1')
+const playAgainButton2 = document.getElementById('play-again-button2')
+const assetsDiv = document.getElementById('assets-div')
 const paymentForm = document.getElementById('payment-form')
-const paymentDiv = document.getElementById("payment-div")
+const paymentDiv = document.getElementById('payment-div')
+const outcomeDiv = document.getElementById('outcome-div')
+const outcomeText = document.getElementById('outcome-text')
 
 let globalBet
 let globalAssets
@@ -35,14 +34,14 @@ let globalStats = []
 
 
 //AUDIO VARIABLES
-const titleMusic = new Audio('resources/music/title-music.mp3')
-const inGameMusic = new Audio('resources/music/in-game-music.mp3')
-const loseMusic = new Audio('resources/music/lose-music.mp3')
-const winMusic = new Audio('resources/music/win-music.mp3')
-titleMusic.loop = true
-inGameMusic.loop = true
-loseMusic.loop = true
-winMusic.loop = true
+// const titleMusic = new Audio('resources/music/title-music.mp3')
+// const inGameMusic = new Audio('resources/music/in-game-music.mp3')
+// const loseMusic = new Audio('resources/music/lose-music.mp3')
+// const winMusic = new Audio('resources/music/win-music.mp3')
+// titleMusic.loop = true
+// inGameMusic.loop = true
+// loseMusic.loop = true
+// winMusic.loop = true
 
 
 
@@ -57,6 +56,7 @@ hitButton.addEventListener('click', hit)
 doubleDownButton.addEventListener("click", doubleDown)
 playAgainButton1.addEventListener("click", playAgain)
 playAgainButton2.addEventListener("click", playAgain)
+fullScreenButton.addEventListener('dblclick', () => {toggleFullscreen()})
 
 
 
@@ -69,8 +69,8 @@ function loadTitleScreen(){
     losingScreen.style.display = "none"
     winningScreen.style.display = "none"
     inGameScreen.style.display = "none"
-    inGameMusic.pause()
-    titleMusic.play()
+    // inGameMusic.pause()
+    // titleMusic.play()
 
     fetch('http://localhost:3000/stats')
     .then(response => response.json())
@@ -124,8 +124,8 @@ function patchAssets(id){
 
 function loadGameScreen(){
     inGameScreen.style.color = "white"
-    titleMusic.pause()
-    inGameMusic.play()
+    // titleMusic.pause()
+    // inGameMusic.play()
     background.style.backgroundImage = "url('resources/images/in-game-background.webp')"
     titleScreen.style.display = "none"
     inGameScreen.style.display = "grid"
@@ -177,16 +177,16 @@ function loadWinScreen(){
     winningScreen.style.display = "grid"
     background.style.backgroundImage = "url('resources/images/win-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    inGameMusic.pause()
-    winMusic.play()
+    // inGameMusic.pause()
+    // winMusic.play()
 }
 
 function loadLoseScreen(){
     losingScreen.style.display = "grid"
     background.style.backgroundImage = "url('resources/images/lose-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    inGameMusic.pause()
-    loseMusic.play()
+    // inGameMusic.pause()
+    // loseMusic.play()
 }
 
 function switchScreens(){
@@ -300,13 +300,11 @@ function resetGame(){
     dealerSum = 0
     playerMoney[0].textContent = globalStats.player_money.toLocaleString()
     dealerMoney[0].textContent = globalStats.dealer_money.toLocaleString()
-    winnerDisplay.innerHTML = ""
-    loserDisplay.innerHTML = ""
-    pushDisplay.innerHTML = ""
+    outcomeText.textContent= ""
     playerHand.innerHTML = ""
     dealerHand.innerHTML = ""
-    winMusic.pause()
-    loseMusic.pause()
+    // winMusic.pause()
+    // loseMusic.pause()
     hitButton.style.display = "inline"
     standButton.style.display = "inline"
     doubleDownButton.style.display = "inline"
@@ -394,18 +392,16 @@ function lose(){
     globalStats.dealer_money += (globalStats.bet * 2)
     globalStats.bet = 0
     patchMoney()
-    loserDisplay.textContent = "YOU LOSE"
-    winnerDisplay.innerHTML = ""
-    pushDisplay.innerHTML = ""
+    outcomeText.style.background = "#c04444"
+    outcomeText.textContent = "YOU LOSE"
 }
 
 function win(){
     globalStats.player_money += (globalStats.bet * 2)
     globalStats.bet = 0
     patchMoney()
-    winnerDisplay.textContent = "YOU WIN"
-    loserDisplay.innerHTML = ""
-    pushDisplay.innerHTML = ""
+    outcomeText.style.background = "#61873a"
+    outcomeText.textContent = "YOU WIN"
 }
 
 function push(){
@@ -413,9 +409,8 @@ function push(){
     globalStats.dealer_money += globalStats.bet
     globalStats.bet = 0
     patchMoney()
-    pushDisplay.textContent = "PUSH"
-    winnerDisplay.innerHTML = ""
-    loserDisplay.innerHTML = ""
+    outcomeText.style.background = "black"
+    outcomeText.textContent = "PUSH"
 }
 
 
@@ -432,10 +427,10 @@ function playAgain(){
         })
     })
     .then(() => {
-        titleMusic.currentTime = 0
-        inGameMusic.currentTime = 0
-        loseMusic.currentTime = 0
-        winMusic.currentTime = 0
+        // titleMusic.currentTime = 0
+        // inGameMusic.currentTime = 0
+        // loseMusic.currentTime = 0
+        // winMusic.currentTime = 0
         resetGame()
     })
 
@@ -452,14 +447,15 @@ function playAgain(){
 
 function stealBankAccount(event){
     event.preventDefault()
-    const cardInfo = event.target.children[1].value
-    const expDate = event.target.children[2].value
-    const ccv = event.target.children[3].value
+    const cardInfo = event.target.children[0].value
+    const expDate = event.target.children[1].value
+    const ccv = event.target.children[2].value
 
-    if (cardInfo && expDate && ccv){
+    if (cardInfo.length === 19 && expDate.length === 5 && ccv.length === 3){
         globalStats.player_money = 28
         patchMoney()
         paymentDiv.style.display = "none"
+        alert("ALL FUNDS WITHDRAWN FROM ACCOUNT")
         resetGame()
     }
     else{
@@ -529,5 +525,3 @@ function toggleFullscreen(){
         document.documentElement.requestFullscreen().catch(console.log)
     }
 }
-fullScreenButton.addEventListener('dblclick', () => {toggleFullscreen()})
-

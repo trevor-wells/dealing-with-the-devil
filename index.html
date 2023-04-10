@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="title-screen">
         <div id="full-screen">
             <button id="full-screen-button">Full Screen</button>
@@ -45,28 +44,20 @@
         <div id="all-in-div">
             <button id="all-in-button">All-In</button>
         </div>
-        <div id="assets-div">
-        </div>
+        <div id="assets-div"></div>
         </div>
     </div>
 
+
     <div id="in-game-screen">
-        <div id="dealer">
-            <span>
-                <p>Dealer Obol: <em class="dealer-money"></em></p>
-            </span>
-            <span id ="dealer-hand" class="card-container">
-            </span>
+        <div id="dealer-div">
+            <p>Dealer Obol: <em class="dealer-money"></em></p>
+            <span id ="dealer-hand" class="card-container"></span>
         </div>
-        <div id="player">
-            <span>
-                <p>Player Obol: <em class="player-money"></em></p>
-            </span>
-            <div id="winner-display"></div>
-            <div id="loser-display"></div>
-            <div id="push-display"></div>
-            <span id="player-hand" class="card-container">
-            </span>
+        <div id="player-div">
+            <div id="outcome-div"><p id="outcome-text"></p></div>
+            <p>Player Obol: <em class="player-money"></em></p>
+            <span id="player-hand" class="card-container"></span>
         </div>
         <div id="hit-and-stand-div">
             <button id="hit-button">Hit</button>
@@ -77,25 +68,29 @@
         </div>
     </div>
 
+
     <div id="losing-screen">
-        <p>THE DEVIL TOOK ALL YOUR OBOL AND KICKED YOU TO THE JUNKYARD</p>
-        <div id="payment-div">
-            <p>Extract all the obol from your bank account to keep playing?</p>
-            <form id="payment-form">
-                <label for="payment-input">Card Information</label>
-                <input id="payment-input" name="payment-input" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" onkeyup="formatPaymentInfoKey(event)" >
-                <input type="text" id="card-expiration" placeholder="MM/YY" maxlength="5" onkeyup="formatDate(event);">
-                <input type="text" id="cvs-code" placeholder="CCV code" maxlength="3">
-                <input type="submit" id="payment" value="Confirm">
-            </form>
-        </div>
-        <button id="play-again-button1">Play Again?</button>
+        <div id="lose-content-div">
+            <p id="lose-text">THE DEVIL HAS TAKEN YOUR SOUL</p>
+            <button id="play-again-button1">Play Again</button>
+            <div id="payment-div">
+                <p>Or input credit card info to keep playing</p>
+                <form id="payment-form">
+                    <input id="payment-input" name="payment-input" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" onkeyup="formatPaymentInfoKey(event)" >
+                    <input type="text" id="card-expiration" placeholder="MM/YY" maxlength="5" onkeyup="formatDate(event);">
+                    <input type="text" id="cvv-code" placeholder="CVV" maxlength="3">
+                    <input type="submit" id="payment" value="Confirm">
+                </form>
+            </div>
+        </div>  
     </div>
+
 
     <div id="winning-screen">
-        <p>YOU MADE IT TO HEAVEN!</p>
-        <button id="play-again-button2">Play Again?</button>
+        <div id="win-content-div">
+            <p id="win-text">YOU DEFEATED THE DEVIL AND MADE IT TO HEAVEN!</p>
+            <button id="play-again-button2">Play Again</button>
+        </div>
     </div>
-
 </body>
 </html>

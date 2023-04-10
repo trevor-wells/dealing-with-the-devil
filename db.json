@@ -375,36 +375,36 @@
       "id": 0,
       "name": "House",
       "owned": true,
-      "image": "resources/images/housey.png",
+      "image": "resources/images/house.png",
       "value": 80000
     },
     {
       "id": 1,
       "name": "Car",
       "owned": true,
-      "image": "resources/images/cary.png",
+      "image": "resources/images/car.png",
       "value": 10000
     },
     {
       "id": 2,
       "name": "Wedding Ring",
       "owned": true,
-      "image": "resources/images/ringy.png",
-      "value": 7000
+      "image": "resources/images/ring.png",
+      "value": 1000
     },
     {
       "id": 3,
       "name": "Kid",
       "owned": true,
-      "image": "resources/images/kiddy.png",
+      "image": "resources/images/kid.png",
       "value": 500
     },
     {
       "id": 4,
-      "name": "Soul",
+      "name": "Kidney",
       "owned": true,
-      "image": "resources/images/souly.png",
-      "value": 2500
+      "image": "resources/images/kidney.png",
+      "value": 8500
     }
   ]
 }

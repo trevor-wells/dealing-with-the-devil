@@ -1,15 +1,16 @@
+/* GENERAL STYLING */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Henny Penny', cursive;
+    font-family: 'Henny Penny';
     font-size: 1.2rem;
     text-align: center;
     color: #d2cbc3;
 }
 
 html{
-    background: url("assets/title-screen-background.jpeg") no-repeat center center fixed;
+    background: url("resources/images/title-screen-background.jpeg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -29,9 +30,14 @@ button{
     font-size: 20px;
 }
 
+button:hover {
+    cursor: pointer;
+    background: #772929
+}
+
 .card {
-    width: 200px;
-    height: 300px;
+    width: 180px;
+    height: 270px;
 }
 
 .asset{
@@ -39,6 +45,12 @@ button{
     height: 100px;
 }
 
+
+
+
+
+
+/* TITLE SCREEN STYLING */
 #title-screen{
     display: grid;
     grid-template-columns: repeat(20,5vw);
@@ -123,26 +135,29 @@ button{
     display: flex;
 }
 
+
+
+
+
+
+
+
+/* IN-GAME SCREEN STYLING */
 #in-game-screen{
     display: grid;
     grid-template-columns: repeat(20,5vw);
     grid-template-rows: repeat(20,5vh);
 }
 
-#dealer{
+#dealer-div{
     grid-column: 1/21;
     grid-row: 2/5;
 }
 
-#player{
+#player-div{
     grid-column: 1/21;
     grid-row: 9/13;
 }
-
-button:hover {
-    cursor: pointer;
-    background: #772929
-    }
 
 #hit-and-stand-div{
     grid-column: 10/12;
@@ -154,16 +169,86 @@ button:hover {
     grid-row: 19/20;
 }
 
-#loser-display{
-    font-size: 80px;
-    color: #c04444;
+#outcome-div{
+    display: flex;
+    justify-content: center;
 }
 
-#winner-display{
+#outcome-text{
     font-size: 80px;
-    color: #0d8924;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 0px 20px;
 }
 
-#push-display{
-    font-size: 80px;
+
+
+
+
+
+
+/* WIN SCREEN STYLING */
+#winning-screen{
+    display: grid;
+    grid-template-columns: repeat(20,5vw);
+    grid-template-rows: repeat(20,5vh);
+}
+
+#win-content-div{
+    grid-column: 7 / 15;
+    grid-row: 7/16;
+}
+
+#win-text{
+    font-size: 60px;
+    color: black;
+}
+
+#play-again-button2{
+    background: #61873a;
+}
+
+#play-again-button2:hover{
+    background: #47642a
+}
+
+
+
+
+/* LOSE SCREEN STYLING */
+#losing-screen{
+    display: grid;
+    grid-template-columns: repeat(20,5vw);
+    grid-template-rows: repeat(20,5vh);
+}
+
+#lose-content-div{
+    grid-column: 7 / 15;
+    grid-row: 8/17;
+}
+
+#lose-text{
+    font-size: 60px;
+}
+
+#payment-div{
+    margin: 20px;
+}
+
+#payment-form input{
+    width: 50%;
+    color: black;
+    font-family: monospace;
+}
+
+#payment-form #payment{
+    background: #c04444;
+    color: #d2cbc3;
+    border: none;
+    border-radius: 5px;
+    font-family: 'Henny Penny';
+}
+
+#payment-form #payment:hover{
+    background: #772929
 }
