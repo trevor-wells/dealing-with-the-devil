@@ -433,7 +433,7 @@ function push(){
 function formatDate(event) {
     String.fromCharCode(event.keyCode);
     let code = event.keyCode;
-    let allowedKeys = [8];
+    let allowedKeys = [5];
     if (allowedKeys.indexOf(code) !== -1) {
       return;
     }
