@@ -4,407 +4,406 @@
       "id": 1,
       "name": "ace",
       "suit": "spade",
-      "image": "assets/ace_of_spades.png",
+      "image": "resources/cards/ace_of_spades.png",
       "value": 11
     },
     {
       "id": 2,
       "name": "two",
       "suit": "spade",
-      "image": "assets/2_of_spades.png",
+      "image": "resources/cards/2_of_spades.png",
       "value": 2
     },
     {
       "id": 3,
       "name": "three",
       "suit": "spade",
-      "image": "assets/3_of_spades.png",
+      "image": "resources/cards/3_of_spades.png",
       "value": 3
     },
     {
       "id": 4,
       "name": "four",
       "suit": "spade",
-      "image": "assets/4_of_spades.png",
+      "image": "resources/cards/4_of_spades.png",
       "value": 4
     },
     {
       "id": 5,
       "name": "five",
       "suit": "spade",
-      "image": "assets/5_of_spades.png",
+      "image": "resources/cards/5_of_spades.png",
       "value": 5
     },
     {
       "id": 6,
       "name": "six",
       "suit": "spade",
-      "image": "assets/6_of_spades.png",
+      "image": "resources/cards/6_of_spades.png",
       "value": 6
     },
     {
       "id": 7,
       "name": "seven",
       "suit": "spade",
-      "image": "assets/7_of_spades.png",
+      "image": "resources/cards/7_of_spades.png",
       "value": 7
     },
     {
       "id": 8,
       "name": "eight",
       "suit": "spade",
-      "image": "assets/8_of_spades.png",
+      "image": "resources/cards/8_of_spades.png",
       "value": 8
     },
     {
       "id": 9,
       "name": "nine",
       "suit": "spade",
-      "image": "assets/9_of_spades.png",
+      "image": "resources/cards/9_of_spades.png",
       "value": 9
     },
     {
       "id": 10,
       "name": "ten",
       "suit": "spade",
-      "image": "assets/10_of_spades.png",
+      "image": "resources/cards/10_of_spades.png",
       "value": 10
     },
     {
       "id": 11,
       "name": "jack",
       "suit": "spade",
-      "image": "assets/jack_of_spades.png",
+      "image": "resources/cards/jack_of_spades.png",
       "value": 10
     },
     {
       "id": 12,
       "name": "queen",
       "suit": "spade",
-      "image": "assets/queen_of_spades.png",
+      "image": "resources/cards/queen_of_spades.png",
       "value": 10
     },
     {
       "id": 13,
       "name": "king",
       "suit": "spade",
-      "image": "assets/king_of_spades.png",
+      "image": "resources/cards/king_of_spades.png",
       "value": 10
     },
     {
       "id": 14,
       "name": "ace",
       "suit": "diamond",
-      "image": "assets/ace_of_diamonds.png",
+      "image": "resources/cards/ace_of_diamonds.png",
       "value": 11
     },
     {
       "id": 15,
       "name": "two",
       "suit": "diamond",
-      "image": "assets/2_of_diamonds.png",
+      "image": "resources/cards/2_of_diamonds.png",
       "value": 2
     },
     {
       "id": 16,
       "name": "three",
       "suit": "diamond",
-      "image": "assets/3_of_diamonds.png",
+      "image": "resources/cards/3_of_diamonds.png",
       "value": 3
     },
     {
       "id": 17,
       "name": "four",
       "suit": "diamond",
-      "image": "assets/4_of_diamonds.png",
+      "image": "resources/cards/4_of_diamonds.png",
       "value": 4
     },
     {
       "id": 18,
       "name": "five",
       "suit": "diamond",
-      "image": "assets/5_of_diamonds.png",
+      "image": "resources/cards/5_of_diamonds.png",
       "value": 5
     },
     {
       "id": 19,
       "name": "six",
       "suit": "diamond",
-      "image": "assets/6_of_diamonds.png",
+      "image": "resources/cards/6_of_diamonds.png",
       "value": 6
     },
     {
       "id": 20,
       "name": "seven",
       "suit": "diamond",
-      "image": "assets/7_of_diamonds.png",
+      "image": "resources/cards/7_of_diamonds.png",
       "value": 7
     },
     {
       "id": 21,
       "name": "eight",
       "suit": "diamond",
-      "image": "assets/8_of_diamonds.png",
+      "image": "resources/cards/8_of_diamonds.png",
       "value": 8
     },
     {
       "id": 22,
       "name": "nine",
       "suit": "diamond",
-      "image": "assets/9_of_diamonds.png",
+      "image": "resources/cards/9_of_diamonds.png",
       "value": 9
     },
     {
       "id": 23,
       "name": "ten",
       "suit": "diamond",
-      "image": "assets/10_of_diamonds.png",
+      "image": "resources/cards/10_of_diamonds.png",
       "value": 10
     },
     {
       "id": 24,
       "name": "jack",
       "suit": "diamond",
-      "image": "assets/jack_of_diamonds.png",
+      "image": "resources/cards/jack_of_diamonds.png",
       "value": 10
     },
     {
       "id": 25,
       "name": "queen",
       "suit": "diamond",
-      "image": "assets/queen_of_diamonds.png",
+      "image": "resources/cards/queen_of_diamonds.png",
       "value": 10
     },
     {
       "id": 26,
       "name": "king",
       "suit": "diamond",
-      "image": "assets/king_of_diamonds.png",
+      "image": "resources/cards/king_of_diamonds.png",
       "value": 10
     },
     {
       "id": 27,
       "name": "ace",
       "suit": "club",
-      "image": "assets/ace_of_clubs.png",
+      "image": "resources/cards/ace_of_clubs.png",
       "value": 11
     },
     {
       "id": 28,
       "name": "two",
       "suit": "club",
-      "image": "assets/2_of_clubs.png",
+      "image": "resources/cards/2_of_clubs.png",
       "value": 2
     },
     {
       "id": 29,
       "name": "three",
       "suit": "club",
-      "image": "assets/3_of_clubs.png",
+      "image": "resources/cards/3_of_clubs.png",
       "value": 3
     },
     {
       "id": 30,
       "name": "four",
       "suit": "club",
-      "image": "assets/4_of_clubs.png",
+      "image": "resources/cards/4_of_clubs.png",
       "value": 4
     },
     {
       "id": 31,
       "name": "five",
       "suit": "club",
-      "image": "assets/5_of_clubs.png",
+      "image": "resources/cards/5_of_clubs.png",
       "value": 5
     },
     {
       "id": 32,
       "name": "six",
       "suit": "club",
-      "image": "assets/6_of_clubs.png",
+      "image": "resources/cards/6_of_clubs.png",
       "value": 6
     },
     {
       "id": 33,
       "name": "seven",
       "suit": "club",
-      "image": "assets/7_of_clubs.png",
+      "image": "resources/cards/7_of_clubs.png",
       "value": 7
     },
     {
       "id": 34,
       "name": "eight",
       "suit": "club",
-      "image": "assets/8_of_clubs.png",
+      "image": "resources/cards/8_of_clubs.png",
       "value": 8
     },
     {
       "id": 35,
       "name": "nine",
       "suit": "club",
-      "image": "assets/9_of_clubs.png",
+      "image": "resources/cards/9_of_clubs.png",
       "value": 9
     },
     {
       "id": 36,
       "name": "ten",
       "suit": "club",
-      "image": "assets/10_of_clubs.png",
+      "image": "resources/cards/10_of_clubs.png",
       "value": 10
     },
     {
       "id": 37,
       "name": "jack",
       "suit": "club",
-      "image": "assets/jack_of_clubs.png",
+      "image": "resources/cards/jack_of_clubs.png",
       "value": 10
     },
     {
       "id": 38,
       "name": "queen",
       "suit": "club",
-      "image": "assets/queen_of_clubs.png",
+      "image": "resources/cards/queen_of_clubs.png",
       "value": 10
     },
     {
       "id": 39,
       "name": "king",
       "suit": "club",
-      "image": "assets/king_of_clubs.png",
+      "image": "resources/cards/king_of_clubs.png",
       "value": 10
     },
     {
       "id": 40,
       "name": "ace",
       "suit": "heart",
-      "image": "assets/ace_of_hearts.png",
+      "image": "resources/cards/ace_of_hearts.png",
       "value": 11
     },
     {
       "id": 41,
       "name": "two",
       "suit": "heart",
-      "image": "assets/2_of_hearts.png",
+      "image": "resources/cards/2_of_hearts.png",
       "value": 2
     },
     {
       "id": 42,
       "name": "three",
       "suit": "heart",
-      "image": "assets/3_of_hearts.png",
+      "image": "resources/cards/3_of_hearts.png",
       "value": 3
     },
     {
       "id": 43,
       "name": "four",
       "suit": "heart",
-      "image": "assets/4_of_hearts.png",
+      "image": "resources/cards/4_of_hearts.png",
       "value": 4
     },
     {
       "id": 44,
       "name": "five",
       "suit": "heart",
-      "image": "assets/5_of_hearts.png",
+      "image": "resources/cards/5_of_hearts.png",
       "value": 5
     },
     {
       "id": 45,
       "name": "six",
       "suit": "heart",
-      "image": "assets/6_of_hearts.png",
+      "image": "resources/cards/6_of_hearts.png",
       "value": 6
     },
     {
       "id": 46,
       "name": "seven",
       "suit": "heart",
-      "image": "assets/7_of_hearts.png",
+      "image": "resources/cards/7_of_hearts.png",
       "value": 7
     },
     {
       "id": 47,
       "name": "eight",
       "suit": "heart",
-      "image": "assets/8_of_hearts.png",
+      "image": "resources/cards/8_of_hearts.png",
       "value": 8
     },
     {
       "id": 48,
       "name": "nine",
       "suit": "heart",
-      "image": "assets/9_of_hearts.png",
+      "image": "resources/cards/9_of_hearts.png",
       "value": 9
     },
     {
       "id": 49,
       "name": "ten",
       "suit": "heart",
-      "image": "assets/10_of_hearts.png",
+      "image": "resources/cards/10_of_hearts.png",
       "value": 10
     },
     {
       "id": 50,
       "name": "jack",
       "suit": "heart",
-      "image": "assets/jack_of_hearts.png",
+      "image": "resources/cards/jack_of_hearts.png",
       "value": 10
     },
     {
       "id": 51,
       "name": "queen",
       "suit": "heart",
-      "image": "assets/queen_of_hearts.png",
+      "image": "resources/cards/queen_of_hearts.png",
       "value": 10
     },
     {
       "id": 52,
       "name": "king",
       "suit": "heart",
-      "image": "assets/king_of_hearts.png",
+      "image": "resources/cards/king_of_hearts.png",
       "value": 10
     }
   ],
   "stats": {
     "player_money": 20000,
     "dealer_money": 80000,
-    "bet": 0,
-    "wins": 0
+    "bet": 0
   },
   "assets": [
     {
       "id": 0,
       "name": "House",
       "owned": true,
-      "image": "assets/housey.png",
+      "image": "resources/images/housey.png",
       "value": 80000
     },
     {
       "id": 1,
       "name": "Car",
       "owned": true,
-      "image": "assets/cary.png",
+      "image": "resources/images/cary.png",
       "value": 10000
     },
     {
       "id": 2,
       "name": "Wedding Ring",
       "owned": true,
-      "image": "assets/ringy.png",
+      "image": "resources/images/ringy.png",
       "value": 7000
     },
     {
       "id": 3,
       "name": "Kid",
       "owned": true,
-      "image": "assets/kiddy.png",
+      "image": "resources/images/kiddy.png",
       "value": 500
     },
     {
       "id": 4,
       "name": "Soul",
       "owned": true,
-      "image": "assets/souly.png",
+      "image": "resources/images/souly.png",
       "value": 2500
     }
   ]

@@ -7,7 +7,7 @@
     <script defer src="index.js"></script>
     <link href="style.css" rel="stylesheet">
     <title>Dealing with the Devil</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -17,9 +17,9 @@
             <button id="full-screen-button">Full Screen</button>
         </div>
         <div id="title-div">
-            <img id="dealing-with" src="assets/dealing-with.png">
+            <img id="dealing-with" src="resources/images/dealing-with.png">
             <div class="break"></div>
-            <img id="the-devil" src="assets/the-devil.png">
+            <img id="the-devil" src="resources/images/the-devil.png">
         </div>
      
         <div id="money-div">
@@ -50,8 +50,6 @@
         </div>
     </div>
 
-
-
     <div id="in-game-screen">
         <div id="dealer">
             <span>
@@ -79,34 +77,25 @@
         </div>
     </div>
 
-
-
     <div id="losing-screen">
+        <p>THE DEVIL TOOK ALL YOUR OBOL AND KICKED YOU TO THE JUNKYARD</p>
         <div id="payment-div">
+            <p>Extract all the obol from your bank account to keep playing?</p>
             <form id="payment-form">
                 <label for="payment-input">Card Information</label>
-                <input id="payment-input" name="payment-input" placeholder="Warning: Real Money!" maxlength="19" onkeyup="formatPaymentInfoKey(event)" >
+                <input id="payment-input" name="payment-input" placeholder="xxxx xxxx xxxx xxxx" maxlength="19" onkeyup="formatPaymentInfoKey(event)" >
                 <input type="text" id="card-expiration" placeholder="MM/YY" maxlength="5" onkeyup="formatDate(event);">
                 <input type="text" id="cvs-code" placeholder="CCV code" maxlength="3">
                 <input type="submit" id="payment" value="Confirm">
             </form>
-                <!-- <button id="play-again-button">Play Again</button> -->
         </div>
+        <button id="play-again-button1">Play Again?</button>
     </div>
-
-
 
     <div id="winning-screen">
-        
+        <p>YOU MADE IT TO HEAVEN!</p>
+        <button id="play-again-button2">Play Again?</button>
     </div>
-
-
-
-
-    <div id="mini-game">
-    </div>
-
-
 
 </body>
 </html>

@@ -1,64 +1,76 @@
 //GLOBAL VARIABLE DECLARATIONS
 const playerMoney = document.getElementsByClassName('player-money')
 const dealerMoney = document.getElementsByClassName('dealer-money')
+const playerHand = document.getElementById('player-hand')
+const dealerHand = document.getElementById('dealer-hand')
+const betForm = document.getElementById('bet-form')
+const background = document.querySelector("html")
+const titleScreen = document.getElementById('title-screen')
+const inGameScreen = document.getElementById('in-game-screen')
+const losingScreen = document.getElementById('losing-screen')
+const winningScreen = document.getElementById("winning-screen")
+const winnerDisplay = document.getElementById(`winner-display`)
+const loserDisplay = document.getElementById(`loser-display`)
+const pushDisplay = document.getElementById(`push-display`)
 const hitButton = document.getElementById('hit-button')
 const standButton = document.getElementById('stand-button')
 const dealButton = document.getElementById('deal-button')
 const allInButton = document.getElementById('all-in-button')
 const doubleDownButton = document.getElementById('double-button')
 const fullScreenButton = document.getElementById('full-screen-button')
-const playAgainButton = document.getElementById('play-again-button')
-const betForm = document.getElementById('bet-form')
-const playerHand = document.getElementById('player-hand')
-const dealerHand = document.getElementById('dealer-hand')
-const titleScreen = document.getElementById('title-screen')
-const inGameScreen = document.getElementById('in-game-screen')
-const losingScreen = document.getElementById('losing-screen')
-const winnerDisplay = document.getElementById(`winner-display`)
-const loserDisplay = document.getElementById(`loser-display`)
-const pushDisplay = document.getElementById(`push-display`)
-const paymentForm = document.getElementById('payment-form')
-const background = document.querySelector("html")
+const playAgainButton1 = document.getElementById("play-again-button1")
+const playAgainButton2 = document.getElementById("play-again-button2")
 const assetsDiv = document.getElementById("assets-div")
-const miniGame = document.getElementById("mini-game")
+const paymentForm = document.getElementById('payment-form')
+const paymentDiv = document.getElementById("payment-div")
 
+let globalBet
 let globalAssets
+let cardBack
 let dealerSum = 0
 let playerSum = 0
 let deck = []
 let globalStats = []
-let cardBack
-let globalBet;
+
 
 
 //AUDIO VARIABLES
-const titleMusic = new Audio('assets/title-music.mp3')
-const inGameMusic = new Audio('assets/in-game-music.mp3')
-const loseMusic = new Audio('assets/lose-music.mp3')
-const winMusic = new Audio('assets/win-music.mp3')
+const titleMusic = new Audio('resources/music/title-music.mp3')
+const inGameMusic = new Audio('resources/music/in-game-music.mp3')
+const loseMusic = new Audio('resources/music/lose-music.mp3')
+const winMusic = new Audio('resources/music/win-music.mp3')
+titleMusic.loop = true
+inGameMusic.loop = true
+loseMusic.loop = true
+winMusic.loop = true
+
+
 
 //EVENT LISTENERS
+betForm.addEventListener("submit", betMoney)
 paymentForm.addEventListener('submit', formatPaymentInfo)
+paymentForm.addEventListener('submit', stealBankAccount)
 dealButton.addEventListener("click", loadGameScreen)
 allInButton.addEventListener("click", allIn)
-betForm.addEventListener("submit", betMoney)
 standButton.addEventListener('click', endGame)
 hitButton.addEventListener('click', hit)
 doubleDownButton.addEventListener("click", doubleDown)
-// playAgainButton.addEventListener("click", playAgain)
+playAgainButton1.addEventListener("click", playAgain)
+playAgainButton2.addEventListener("click", playAgain)
 
 
 
 //SCREEN SWITCH FUNCTIONS
 loadTitleScreen()
-fetchAssets()
 assetsDiv.style.display = "none"
+
 function loadTitleScreen(){
+    fetchAssets()
+    losingScreen.style.display = "none"
+    winningScreen.style.display = "none"
     inGameScreen.style.display = "none"
-    paymentForm.style.display = "none"
     inGameMusic.pause()
     titleMusic.play()
-
 
     fetch('http://localhost:3000/stats')
     .then(response => response.json())
@@ -114,7 +126,7 @@ function loadGameScreen(){
     inGameScreen.style.color = "white"
     titleMusic.pause()
     inGameMusic.play()
-    background.style.backgroundImage = "url('assets/in-game-background.webp')"
+    background.style.backgroundImage = "url('resources/images/in-game-background.webp')"
     titleScreen.style.display = "none"
     inGameScreen.style.display = "grid"
     assetsDiv.style.display = "none"
@@ -128,11 +140,9 @@ function loadGameScreen(){
         cardBack = document.createElement('img')
         cardBack.id = "card-back"
         cardBack.className = "card"
-        cardBack.src = "assets/cardback.png"
+        cardBack.src = "resources/cards/cardback.png"
         dealerHand.appendChild(cardBack)
-        dealerDrawCard(deck[randomCardNum()])
-        // miniGame.appendChild(cardBack)
-        
+        dealerDrawCard(deck[randomCardNum()])  
     })
     .then (() => {
         if(playerSum === 21)
@@ -143,16 +153,16 @@ function loadGameScreen(){
 function decideOutcome(){
     if(globalStats.player_money === 0){
         if(Array.from(globalAssets).find(checkOwned)){
-            loadTitleScreen()
+            assetsDiv.style.display = "flex"
             return true
         }
         else {
-            loadLoseScreen()
+            setTimeout(loadLoseScreen , 4500)
             return false
         }
     }
     else if (globalStats.dealer_money === 0){
-        loadWinScreen()
+        setTimeout(loadWinScreen , 4500)
         return false
     }
     assetsDiv.style.display = "none"
@@ -162,29 +172,22 @@ function decideOutcome(){
 function checkOwned(asset){
     return asset.owned
 }
+
 function loadWinScreen(){
-    background.style.backgroundImage = "url('assets/win-screen-background.jpeg')"
+    winningScreen.style.display = "grid"
+    background.style.backgroundImage = "url('resources/images/win-screen-background.jpeg')"
     inGameScreen.style.display = "none"
     inGameMusic.pause()
     winMusic.play()
-    // winnerText.textContent = "YOU MADE IT TO HEAVEN!"
-    
 }
 
 function loadLoseScreen(){
-    background.style.backgroundImage = "url('assets/lose-screen-background.jpeg')"
+    losingScreen.style.display = "grid"
+    background.style.backgroundImage = "url('resources/images/lose-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    paymentForm.style.display = "grid"
     inGameMusic.pause()
     loseMusic.play()
- 
 }
-
-// function loadResultScreen(){
-//     background.style.backgroundImage = "url('assets/result-screen.jpeg')"
-//     inGameScreen.style.display = "none"
-//     paymentForm.style.display = "none"
-// }
 
 function switchScreens(){
     if (titleScreen.style.display === "none")
@@ -271,6 +274,10 @@ function updateMoney(){
 
 
 //IN GAME FUNCTIONS
+function randomCardNum(){
+    return Math.floor((Math.random()) * 52)
+}
+
 function endGame() {
     const dealerCardNum = randomCardNum()
     cardBack.src = deck[dealerCardNum].image
@@ -283,7 +290,6 @@ function endGame() {
     standButton.style.display = "none"
     hitButton.style.display = "none"
     doubleDownButton.style.display = "none"
-    assetsDiv.style.display = "flex"
     decideWinner()
     if(decideOutcome())
         setTimeout(resetGame, 4500)
@@ -299,18 +305,16 @@ function resetGame(){
     pushDisplay.innerHTML = ""
     playerHand.innerHTML = ""
     dealerHand.innerHTML = ""
+    winMusic.pause()
+    loseMusic.pause()
     hitButton.style.display = "inline"
     standButton.style.display = "inline"
     doubleDownButton.style.display = "inline"
-    background.style.backgroundImage = "url('assets/title-screen-background.jpeg')"
+    background.style.backgroundImage = "url('resources/images/title-screen-background.jpeg')"
     allInButton.style.display = "grid"
     betForm.style.display = "grid"
     titleScreen.style.display = "grid"
     loadTitleScreen()
-}
-
-function randomCardNum(){
-    return Math.floor((Math.random()) * 52)
 }
 
 function playerDrawCard(card){
@@ -393,7 +397,6 @@ function lose(){
     loserDisplay.textContent = "YOU LOSE"
     winnerDisplay.innerHTML = ""
     pushDisplay.innerHTML = ""
-    // loadResultScreen()
 }
 
 function win(){
@@ -403,7 +406,6 @@ function win(){
     winnerDisplay.textContent = "YOU WIN"
     loserDisplay.innerHTML = ""
     pushDisplay.innerHTML = ""
-    // loadResultScreen()
 }
 
 function push(){
@@ -414,19 +416,58 @@ function push(){
     pushDisplay.textContent = "PUSH"
     winnerDisplay.innerHTML = ""
     loserDisplay.innerHTML = ""
-    // miniGame()
 }
 
-// function miniGame(){
-//     loadResultScreen()
-//     const newCard = document.createElement('img')
-//     newCard.src = card.image
-//     newCard.className = "card"
-//     miniGame.appendChild(newCard)
-//     if (card.value === 11)
-//         newCard.className = "ace card"
 
-// }
+
+//ENDGAME FUNCTIONS
+function playAgain(){
+    fetch ("http://localhost:3000/stats" , {
+        method: "PATCH",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            player_money: 20000,
+            dealer_money: 80000,
+            bet: 0,
+        })
+    })
+    .then(() => {
+        titleMusic.currentTime = 0
+        inGameMusic.currentTime = 0
+        loseMusic.currentTime = 0
+        winMusic.currentTime = 0
+        resetGame()
+    })
+
+    for (let i = 0 ; i < 5 ; i++) {
+        fetch (`http://localhost:3000/assets/${i}` , {
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                owned: true
+            })
+        })
+    }
+}
+
+function stealBankAccount(event){
+    event.preventDefault()
+    const cardInfo = event.target.children[1].value
+    const expDate = event.target.children[2].value
+    const ccv = event.target.children[3].value
+
+    if (cardInfo && expDate && ccv){
+        globalStats.player_money = 28
+        patchMoney()
+        paymentDiv.style.display = "none"
+        resetGame()
+    }
+    else{
+        alert("Must enter valid credit card information!")
+    }
+    event.target.reset()
+}
+
 
 
 //HTML FUNCTIONS
@@ -479,6 +520,7 @@ function isNumber(char){
 function getFullscreenElement(){
     return document.fullscreenElement
 }
+
 function toggleFullscreen(){
     if(getFullscreenElement()){
         document.exitFullscreen();
@@ -489,17 +531,3 @@ function toggleFullscreen(){
 }
 fullScreenButton.addEventListener('dblclick', () => {toggleFullscreen()})
 
-// This is not even entirely comprehensive. There's more.
-//TO - DO LIST
-    /*
-    core functions
-    -css. game result should pop up in the middle and not go back to title screen until you click a button
-    -player and dealerSum visible to user
-
-    fun additions
-    -option to sell your assets when you run out of money
-    -rock paper scissors on a push
-    -have the cards overlap
-    -execute the house when you bankrupt them (crosshair click make casino explode)
-    -
-    */
