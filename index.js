@@ -34,14 +34,14 @@ let globalStats = []
 
 
 //AUDIO VARIABLES
-// const titleMusic = new Audio('resources/music/title-music.mp3')
-// const inGameMusic = new Audio('resources/music/in-game-music.mp3')
-// const loseMusic = new Audio('resources/music/lose-music.mp3')
-// const winMusic = new Audio('resources/music/win-music.mp3')
-// titleMusic.loop = true
-// inGameMusic.loop = true
-// loseMusic.loop = true
-// winMusic.loop = true
+const titleMusic = new Audio('resources/music/title-music.mp3')
+const inGameMusic = new Audio('resources/music/in-game-music.mp3')
+const loseMusic = new Audio('resources/music/lose-music.mp3')
+const winMusic = new Audio('resources/music/win-music.mp3')
+titleMusic.loop = true
+inGameMusic.loop = true
+loseMusic.loop = true
+winMusic.loop = true
 
 
 
@@ -69,8 +69,8 @@ function loadTitleScreen(){
     losingScreen.style.display = "none"
     winningScreen.style.display = "none"
     inGameScreen.style.display = "none"
-    // inGameMusic.pause()
-    // titleMusic.play()
+    inGameMusic.pause()
+    titleMusic.play()
 
     fetch('http://localhost:3000/stats')
     .then(response => response.json())
@@ -124,8 +124,8 @@ function patchAssets(id){
 
 function loadGameScreen(){
     inGameScreen.style.color = "white"
-    // titleMusic.pause()
-    // inGameMusic.play()
+    titleMusic.pause()
+    inGameMusic.play()
     background.style.backgroundImage = "url('resources/images/in-game-background.webp')"
     titleScreen.style.display = "none"
     inGameScreen.style.display = "grid"
@@ -177,16 +177,16 @@ function loadWinScreen(){
     winningScreen.style.display = "grid"
     background.style.backgroundImage = "url('resources/images/win-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    // inGameMusic.pause()
-    // winMusic.play()
+    inGameMusic.pause()
+    winMusic.play()
 }
 
 function loadLoseScreen(){
     losingScreen.style.display = "grid"
     background.style.backgroundImage = "url('resources/images/lose-screen-background.jpeg')"
     inGameScreen.style.display = "none"
-    // inGameMusic.pause()
-    // loseMusic.play()
+    inGameMusic.pause()
+    loseMusic.play()
 }
 
 function switchScreens(){
@@ -303,8 +303,8 @@ function resetGame(){
     outcomeText.textContent= ""
     playerHand.innerHTML = ""
     dealerHand.innerHTML = ""
-    // winMusic.pause()
-    // loseMusic.pause()
+    winMusic.pause()
+    loseMusic.pause()
     hitButton.style.display = "inline"
     standButton.style.display = "inline"
     doubleDownButton.style.display = "inline"
@@ -427,10 +427,10 @@ function playAgain(){
         })
     })
     .then(() => {
-        // titleMusic.currentTime = 0
-        // inGameMusic.currentTime = 0
-        // loseMusic.currentTime = 0
-        // winMusic.currentTime = 0
+        titleMusic.currentTime = 0
+        inGameMusic.currentTime = 0
+        loseMusic.currentTime = 0
+        winMusic.currentTime = 0
         resetGame()
     })
 
